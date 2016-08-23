@@ -1,0 +1,107 @@
+;; Add package repos
+(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
+                         ("marmalade" . "https://marmalade-repo.org/packages/")
+                         ("melpa" . "https://melpa.org/packages/")))
+
+(setq dired-use-ls-dired nil)
+
+;; ido and flx-ido
+(add-hook 'after-init-hook
+	  (lambda()
+	    (ido-mode 1)
+	    (ido-everywhere 1)
+	    (flx-ido-mode 1)
+	    ;; disable ido faces to see flx highlights.
+	    (setq ido-use-faces nil)))
+
+;; Auto Save setup
+(setq backup-directory-alist
+      `((".*" . ,temporary-file-directory)))
+(setq auto-save-file-name-transforms
+                `((".*" ,temporary-file-directory t)))
+
+;; Backup file setup
+(setq backup-directory-alist
+      `((".*" . ,temporary-file-directory)))
+(setq auto-save-file-name-transforms
+                `((".*" ,temporary-file-directory t)))
+
+;; Show column numbers
+(column-number-mode 1)
+
+;; Highlight matching paren
+(show-paren-mode 1)
+
+;; Kill trailing white space
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+;; Smex - Meta-x using ido
+;; Loading is delayed until first use
+(autoload 'smex "smex"
+    "Smex is a M-x enhancement for Emacs, it provides a convenient interface to
+your recently and most frequently used commands.")
+(global-set-key (kbd "M-x") 'smex)
+
+;; quiet, please! No dinging!
+;; http://stuff-things.net/2015/10/05/emacs-visible-bell-work-around-on-os-x-el-capitan/
+(setq visible-bell nil)
+(setq ring-bell-function (lambda ()
+			   (invert-face 'mode-line)
+			   (run-with-timer 0.1 nil 'invert-face 'mode-line)))
+
+;; Projectile
+(add-hook 'after-init-hook #'projectile-global-mode)
+(global-set-key (kbd "C-x t") 'projectile-find-file)
+
+;; Window navigation
+(global-set-key (kbd "ESC <left>") 'windmove-left)
+(global-set-key (kbd "ESC <right>") 'windmove-right)
+(global-set-key (kbd "ESC <up>") 'windmove-up)
+(global-set-key (kbd "ESC <down>") 'windmove-down)
+
+;; Multiple cursors
+(global-set-key (kbd "^[ >") 'mc/mark-next-like-this)
+(global-set-key (kbd "^[ <") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c ^[ <") 'mc/mark-all-like-this)
+
+;; ESLint -- look in node_modules for executable
+(defun my/use-eslint-from-node-modules ()
+  (let* ((root (locate-dominating-file
+		(or (buffer-file-name) default-directory)
+		"node_modules"))
+	 (eslint (and root
+		      (expand-file-name "node_modules/eslint/bin/eslint.js"
+					root))))
+    (when (and eslint (file-executable-p eslint))
+      (setq-local flycheck-javascript-eslint-executable eslint))))
+
+(add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
+
+;; JS Editing
+;; Use js2-mode for .js files
+(setq-default indent-tabs-mode nil)
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.json\\'" . js2-mode))
+;; Leave the error highlighting to ESLint
+(setq
+ js2-mode-show-parse-errors nil
+ js2-mode-show-strict-warnings nil
+ js2-basic-offset 2)
+(add-hook 'js2-mode-hook 'flycheck-mode)
+
+;; Context coloring
+;; A string color that is neutral when context coloring
+(set-face-foreground 'font-lock-string-face "color-246")
+;; Hook for js2-mode
+(add-hook 'js2-mode-hook 'context-coloring-mode)
+;;(require 'context-coloring)
+;; Custom colors
+(custom-set-faces
+ '(context-coloring-level-0-face ((t (:foreground "color-255"))))
+ '(context-coloring-level-1-face ((t (:foreground "color-81"))))
+ '(context-coloring-level-2-face ((t (:foreground "color-175"))))
+ '(context-coloring-level-3-face ((t (:foreground "color-42"))))
+ '(context-coloring-level-4-face ((t (:foreground "color-27"))))
+ '(context-coloring-level-5-face ((t (:foreground "color-92"))))
+ '(context-coloring-level-6-face ((t (:foreground "color-23"))))
+  )
