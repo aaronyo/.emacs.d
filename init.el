@@ -55,6 +55,7 @@ your recently and most frequently used commands.")
 			   (run-with-timer 0.1 nil 'invert-face 'mode-line)))
 
 ;; Projectile
+(setq projectile-enable-caching t)
 (add-hook 'after-init-hook #'projectile-global-mode)
 (global-set-key (kbd "C-x t") 'projectile-find-file)
 
