@@ -20,6 +20,11 @@
 (setq auto-save-file-name-transforms
                 `((".*" ,temporary-file-directory t)))
 
+;; git gutter
+(add-hook 'after-init-hook
+	  (lambda()
+            (global-git-gutter-mode +1)))
+
 ;; Backup file setup
 (setq backup-directory-alist
       `((".*" . ,temporary-file-directory)))
