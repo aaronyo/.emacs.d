@@ -106,8 +106,13 @@ your recently and most frequently used commands.")
 ;; Hook for js2-mode
 (add-hook 'js2-mode-hook 'context-coloring-mode)
 ;;(require 'context-coloring)
+
 ;; Custom colors
 (custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(context-coloring-level-0-face ((t (:foreground "color-255"))))
  '(context-coloring-level-1-face ((t (:foreground "color-81"))))
  '(context-coloring-level-2-face ((t (:foreground "color-175"))))
