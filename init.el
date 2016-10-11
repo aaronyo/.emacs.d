@@ -97,8 +97,12 @@ your recently and most frequently used commands.")
 (setq
  js2-mode-show-parse-errors nil
  js2-mode-show-strict-warnings nil
- js2-basic-offset 2)
+ js2-basic-offset 2
+ fci-rule-column 80
+ fci-rule-character ?|
+ fci-rule-color "color-236")
 (add-hook 'js2-mode-hook 'flycheck-mode)
+(add-hook 'js2-mode-hook 'fci-mode)
 
 ;; Context coloring
 ;; A string color that is neutral when context coloring
