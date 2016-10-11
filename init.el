@@ -70,6 +70,11 @@ your recently and most frequently used commands.")
 (global-set-key (kbd "^[ <") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C-c ^[ <") 'mc/mark-all-like-this)
 
+;; Commenting regions
+(global-set-key (kbd "C-x /") 'comment-region)
+(global-set-key (kbd "C-x \\") 'uncomment-region)
+
+
 ;; ESLint -- look in node_modules for executable
 (defun my/use-eslint-from-node-modules ()
   (let* ((root (locate-dominating-file
