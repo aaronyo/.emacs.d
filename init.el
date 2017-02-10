@@ -19,6 +19,7 @@
       `((".*" . ,temporary-file-directory)))
 (setq auto-save-file-name-transforms
                 `((".*" ,temporary-file-directory t)))
+(add-to-list 'load-path "~/.emacs.d/3p/")
 
 ;; git gutter
 (add-hook 'after-init-hook
@@ -117,6 +118,7 @@ your recently and most frequently used commands.")
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(col-highlight ((t (:background "color-233"))))
  '(context-coloring-level-0-face ((t (:foreground "color-255"))))
  '(context-coloring-level-1-face ((t (:foreground "color-81"))))
  '(context-coloring-level-2-face ((t (:foreground "color-175"))))
@@ -125,6 +127,9 @@ your recently and most frequently used commands.")
  '(context-coloring-level-5-face ((t (:foreground "color-92"))))
  '(context-coloring-level-6-face ((t (:foreground "color-23"))))
  '(font-lock-comment-face ((t (:foreground "color-95"))))
+ '(hl-line ((t (:background "color-233"))))
+ '(lazy-highlight ((t (:background "black" :foreground "white" :underline t))))
+ '(neo-dir-link-face ((t (:foreground "cyan"))))
  '(neo-file-link-face ((t (:foreground "white")))))
 
 ;; neo tree
@@ -137,13 +142,28 @@ your recently and most frequently used commands.")
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(prettier-args (\` ("--single-quote=true" "--trailing-comma=false")))
+ '(prettier-target-mode "js2-mode"))
 
 ;; neetree colors
 ;; defaults were too dark
-(custom-set-faces
- '(col-highlight ((t (:background "color-233"))))
- '(hl-line ((t (:background "color-233"))))
- '(lazy-highlight ((t (:background "black" :foreground "white" :underline t))))
- '(neo-dir-link-face ((t (:foreground "cyan"))))
- '(neo-file-link-face ((t (:foreground "white")))))
+
+
+;; osx clipboard integration
+(defun copy-from-osx ()
+  (shell-command-to-string "pbpaste"))
+
+(defun paste-to-osx (text &optional push)
+  (let ((process-connection-type nil))
+    (let ((proc (start-process "pbcopy" "*Messages*" "pbcopy")))
+      (process-send-string proc text)
+      (process-send-eof proc))))
+
+(setq interprogram-cut-function 'paste-to-osx)
+(setq interprogram-paste-function 'copy-from-osx)
+
+
+(require 'prettier-js)
+(add-hook 'js-mode-hook
+          (lambda ()
+                        (add-hook 'before-save-hook 'prettier-before-save)))
