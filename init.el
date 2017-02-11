@@ -76,21 +76,6 @@ your recently and most frequently used commands.")
 (global-set-key (kbd "C-x /") 'comment-region)
 (global-set-key (kbd "C-x \\") 'uncomment-region)
 
-
-;; ESLint -- look in node_modules for executable
-;; (defun my/use-eslint-from-node-modules ()
-;;   (let* ((root (locate-dominating-file
-;; 		(or (buffer-file-name) default-directory)
-;; 		".eslintrc"))
-;; 	 (eslint (and root
-;; 		      (expand-file-name "node_modules/eslint/bin/eslint.js"
-;; 					root))))
-;;     (when (and eslint (file-executable-p eslint))
-;;       (setq-local flycheck-javascript-eslint-executable eslint))))
-(load-library "set-eslint-executable")
-
-;;(add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
-
 ;; JS Editing
 ;; Use js2-mode for .js files
 (setq-default indent-tabs-mode nil)
@@ -106,6 +91,14 @@ your recently and most frequently used commands.")
  fci-rule-color "color-236")
 (add-hook 'js2-mode-hook 'flycheck-mode)
 (add-hook 'js2-mode-hook 'fci-mode)
+;; Set eslint executable based on buffer
+(load-library "set-eslint-executable")
+
+(require 'prettier-js)
+(add-hook 'js-mode-hook
+          (lambda ()
+                        (add-hook 'before-save-hook 'prettier-before-save)))
+
 
 ;; Context coloring
 ;; A string color that is neutral when context coloring
@@ -138,7 +131,6 @@ your recently and most frequently used commands.")
 (global-set-key [f8] 'neotree-toggle)
 (global-set-key [f9] 'neotree-find)
 
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -163,9 +155,3 @@ your recently and most frequently used commands.")
 
 (setq interprogram-cut-function 'paste-to-osx)
 (setq interprogram-paste-function 'copy-from-osx)
-
-
-(require 'prettier-js)
-(add-hook 'js-mode-hook
-          (lambda ()
-                        (add-hook 'before-save-hook 'prettier-before-save)))
