@@ -76,36 +76,7 @@ your recently and most frequently used commands.")
 (global-set-key (kbd "C-x /") 'comment-region)
 (global-set-key (kbd "C-x \\") 'uncomment-region)
 
-;; JS Editing
-;; Use js2-mode for .js files
-(setq-default indent-tabs-mode nil)
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-(add-to-list 'auto-mode-alist '("\\.json\\'" . js2-mode))
-;; Leave the error highlighting to ESLint
-(setq
- js2-mode-show-parse-errors nil
- js2-mode-show-strict-warnings nil
- js2-basic-offset 2
- fci-rule-column 80
- fci-rule-character ?|
- fci-rule-color "color-236")
-(add-hook 'js2-mode-hook 'flycheck-mode)
-(add-hook 'js2-mode-hook 'fci-mode)
-;; Set eslint executable based on buffer
-(load-library "set-eslint-executable")
-
-(require 'prettier-js)
-(add-hook 'js-mode-hook
-          (lambda ()
-                        (add-hook 'before-save-hook 'prettier-before-save)))
-
-
-;; Context coloring
-;; A string color that is neutral when context coloring
-(set-face-foreground 'font-lock-string-face "color-246")
-;; Hook for js2-mode
-(add-hook 'js2-mode-hook 'context-coloring-mode)
-;;(require 'context-coloring)
+(load-library "setup-js-editing")
 
 ;; Custom colors
 (custom-set-faces
@@ -127,10 +98,6 @@ your recently and most frequently used commands.")
  '(neo-dir-link-face ((t (:foreground "cyan"))))
  '(neo-file-link-face ((t (:foreground "white")))))
 
-;; neo tree
-(global-set-key [f8] 'neotree-toggle)
-(global-set-key [f9] 'neotree-find)
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -139,9 +106,8 @@ your recently and most frequently used commands.")
  '(prettier-args (\` ("--single-quote=true" "--trailing-comma=false")))
  '(prettier-target-mode "js2-mode"))
 
-;; neetree colors
-;; defaults were too dark
-
+(global-set-key [f8] 'neotree-toggle)
+(global-set-key [f9] 'neotree-find)
 
 ;; osx clipboard integration
 (defun copy-from-osx ()
