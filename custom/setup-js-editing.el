@@ -2,7 +2,7 @@
 ;; Use js2-mode for .js files
 (setq-default indent-tabs-mode nil)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-(add-to-list 'auto-mode-alist '("\\.json\\'" . js-mode))
+(add-to-list 'auto-mode-alist '("\\.json\\'" . json-mode))
 ;; Leave the error highlighting to ESLint
 (setq
  js2-mode-show-parse-errors nil
