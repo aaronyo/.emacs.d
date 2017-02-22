@@ -106,7 +106,7 @@ your recently and most frequently used commands.")
  '(js-indent-level 2) ;; controls on-the-fly indent level for json-mode
  '(json-reformat:indent-width 2)
  '(json-reformat:pretty-string\? t)
- '(prettier-args (\` ("--single-quote=true" "--trailing-comma=false")))
+ '(prettier-args (\` ("--single-quote=true" "--trailing-comma=true")))
  '(prettier-target-mode "js2-mode")
  '(standard-indent 2))
 
