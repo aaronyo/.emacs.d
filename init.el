@@ -103,11 +103,6 @@ your recently and most frequently used commands.")
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(js-indent-level 2) ;; controls on-the-fly indent level for json-mode
- '(json-reformat:indent-width 2)
- '(json-reformat:pretty-string\? t)
- '(prettier-args (\` ("--single-quote=true" "--trailing-comma=true")))
- '(prettier-target-mode "js2-mode")
  '(standard-indent 2))
 
 (global-set-key [f8] 'neotree-toggle)
