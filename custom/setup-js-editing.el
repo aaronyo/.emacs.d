@@ -63,7 +63,6 @@
  fci-rule-character ?|
  fci-rule-color "color-236"
 
- prettier-args (\` ("--single-quote=true" "--trailing-comma=all"))
  prettier-target-mode "js2-mode"
 
  )
