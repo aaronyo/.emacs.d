@@ -2,10 +2,14 @@
 ;; Use js2-mode for .js files
 (setq-default indent-tabs-mode nil)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.jsx\\'" . rjsx-mode))
 (add-to-list 'auto-mode-alist '("\\.json\\'" . json-mode))
 
 (add-hook 'js2-mode-hook 'flycheck-mode)
 (add-hook 'js2-mode-hook 'fci-mode)
+
+(add-hook 'rjsx-mode-hook 'flycheck-mode)
+;; (add-hook 'rjsx-mode-hook 'fci-mode)
 
 ;; Set eslint executable based on buffer
 (defun my/use-eslint-from-node-modules ()
@@ -29,22 +33,28 @@
                       (expand-file-name "bin/prettier"
                                         root))))
     (when (and prettier (file-executable-p prettier))
-      (setq-local prettier-command prettier))))
+      (setq-local prettier-js-command prettier))))
 
 (add-hook 'js2-mode-hook #'my/use-prettier-from-node-modules)
+(add-hook 'rjsx-mode-hook #'my/use-prettier-from-node-modules)
 
 
 
-(require 'prettier-js)
-(add-hook 'js-mode-hook
-          (lambda ()
-                        (add-hook 'before-save-hook 'prettier-before-save)))
+;;(require 'prettier-js)
+(add-hook 'js2-mode-hook 'prettier-js-mode)
+(add-hook 'rjsx-mode-hook 'prettier-js-mode)
+
+;; (add-hook 'prettier-js-mode
+;;           (lambda ()
+;;             (add-hook 'before-save-hook 'prettier-before-save)))
 
 ;; Context coloring
 ;; A string color that is neutral when context coloring
 (set-face-foreground 'font-lock-string-face "color-246")
+
 ;; Hook for js2-mode
-(add-hook 'js2-mode-hook 'context-coloring-mode)
+;; (add-hook 'js2-mode-hook 'context-coloring-mode)
+;; (add-hook 'js2-mode-hook 'context-coloring-mode)
 
 (setq
  ;; Leave the error highlighting to ESLint
@@ -63,6 +73,6 @@
  fci-rule-character ?|
  fci-rule-color "color-236"
 
- prettier-target-mode "js2-mode"
+;; prettier-target-mode "prettier-js-mode"
 
  )
