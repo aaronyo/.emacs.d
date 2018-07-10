@@ -1,4 +1,11 @@
 ;; Add package repos
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
                          ("marmalade" . "https://marmalade-repo.org/packages/")
                          ("melpa" . "https://melpa.org/packages/")))
@@ -103,6 +110,9 @@ your recently and most frequently used commands.")
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (smex rjsx-mode projectile prettier-js neotree multiple-cursors markdown-mode json-mode ido-grid-mode git-gutter flycheck flx-ido fill-column-indicator context-coloring)))
  '(standard-indent 2))
 
 (global-set-key [f8] 'neotree-toggle)
