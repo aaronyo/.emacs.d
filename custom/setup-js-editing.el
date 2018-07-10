@@ -53,8 +53,7 @@
 (set-face-foreground 'font-lock-string-face "color-246")
 
 ;; Hook for js2-mode
-;; (add-hook 'js2-mode-hook 'context-coloring-mode)
-;; (add-hook 'js2-mode-hook 'context-coloring-mode)
+(add-hook 'js2-mode-hook 'context-coloring-mode)
 
 (setq
  ;; Leave the error highlighting to ESLint
