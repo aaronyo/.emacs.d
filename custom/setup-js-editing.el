@@ -1,5 +1,6 @@
 ;; JS Editing
 ;; Use js2-mode for .js files
+
 (setq-default indent-tabs-mode nil)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.jsx\\'" . rjsx-mode))
@@ -9,6 +10,7 @@
 (add-hook 'js2-mode-hook 'fci-mode)
 
 (add-hook 'rjsx-mode-hook 'flycheck-mode)
+
 ;; (add-hook 'rjsx-mode-hook 'fci-mode)
 
 ;; Set eslint executable based on buffer
@@ -39,7 +41,7 @@
 (add-hook 'rjsx-mode-hook #'my/use-prettier-from-node-modules)
 
 ;;
-;; Tide for Typescript
+;; Tide and typescript-mode
 ;;
 (defun setup-tide-mode ()
   (interactive)
@@ -63,6 +65,8 @@
 (add-hook 'typescript-mode-hook #'setup-tide-mode)
 (add-hook 'typescript-mode-hook #'my/use-prettier-from-node-modules)
 (add-hook 'typescript-mode-hook 'prettier-js-mode)
+
+(setq typescript-indent-level 2)
 
 
 ;;(require 'prettier-js)
