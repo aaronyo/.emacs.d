@@ -43,6 +43,19 @@
 ;;
 ;; Tide and typescript-mode
 ;;
+;; Set eslint executable based on buffer
+(defun my/use-tslint-from-node-modules ()
+  (let* ((root (locate-dominating-file
+                (or (buffer-file-name) default-directory)
+                "bin/tslint"))
+         (eslint (and root
+                      (expand-file-name "bin/tslint"
+                                        root))))
+    (when (and eslint (file-executable-p eslint))
+      (setq-local flycheck-typescript-tslint-executable eslint))))
+
+(add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
+
 (defun setup-tide-mode ()
   (interactive)
   (tide-setup)
@@ -64,6 +77,7 @@
 
 (add-hook 'typescript-mode-hook #'setup-tide-mode)
 (add-hook 'typescript-mode-hook #'my/use-prettier-from-node-modules)
+(add-hook 'typescript-mode-hook #'my/use-tslint-from-node-modules)
 (add-hook 'typescript-mode-hook 'prettier-js-mode)
 
 (setq typescript-indent-level 2)
