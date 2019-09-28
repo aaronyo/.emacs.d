@@ -112,7 +112,7 @@ your recently and most frequently used commands.")
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (flycheck-ghcmod haskell-mode smex rjsx-mode projectile prettier-js neotree multiple-cursors markdown-mode json-mode ido-grid-mode git-gutter flycheck flx-ido fill-column-indicator context-coloring)))
+    (company flycheck-ghcmod haskell-mode smex rjsx-mode projectile prettier-js neotree multiple-cursors markdown-mode json-mode ido-grid-mode git-gutter flycheck flx-ido fill-column-indicator context-coloring)))
  '(standard-indent 2))
 
 (global-set-key [f8] 'neotree-toggle)
