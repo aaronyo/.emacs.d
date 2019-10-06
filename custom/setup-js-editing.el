@@ -41,20 +41,11 @@
 (add-hook 'rjsx-mode-hook #'my/use-prettier-from-node-modules)
 
 ;;
-;; Tide and typescript-mode
+;; Tide and typescript for esling
 ;;
-;; Set eslint executable based on buffer
-(defun my/use-tslint-from-node-modules ()
-  (let* ((root (locate-dominating-file
-                (or (buffer-file-name) default-directory)
-                "bin/tslint"))
-         (eslint (and root
-                      (expand-file-name "bin/tslint"
-                                        root))))
-    (when (and eslint (file-executable-p eslint))
-      (setq-local flycheck-typescript-tslint-executable eslint))))
 
-(add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules)
+(with-eval-after-load 'flycheck
+  (flycheck-add-mode 'javascript-eslint 'typescript-mode))
 
 (defun setup-tide-mode ()
   (interactive)
@@ -77,7 +68,7 @@
 
 (add-hook 'typescript-mode-hook #'setup-tide-mode)
 (add-hook 'typescript-mode-hook #'my/use-prettier-from-node-modules)
-(add-hook 'typescript-mode-hook #'my/use-tslint-from-node-modules)
+(add-hook 'typescript-mode-hook #'my/use-eslint-from-node-modules)
 (add-hook 'typescript-mode-hook 'prettier-js-mode)
 
 (setq typescript-indent-level 2)
