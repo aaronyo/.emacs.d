@@ -52,6 +52,7 @@
   (tide-setup)
   (flycheck-mode +1)
   (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  (flycheck-add-next-checker 'typescript-tide '(warning . javascript-eslint) 'append)
   (eldoc-mode +1)
   (tide-hl-identifier-mode +1)
   ;; company is an optional dependency. You have to
