@@ -44,10 +44,23 @@
 ;; Tide and typescript for esling
 ;;
 
+;; Set prettier executable based on buffer
+(defun my/use-tsc-from-node-modules ()
+  (let* ((root (locate-dominating-file
+                (or (buffer-file-name) default-directory)
+                "bin/tsc"))
+         (tsserver (and root
+                      (expand-file-name "bin/tsserver"
+                                        root))))
+    (when (and tsserver (file-executable-p tsserver))
+      (setq-local tide-tsserver-executable tsserver)
+      )))
+
 (with-eval-after-load 'flycheck
   (flycheck-add-mode 'javascript-eslint 'typescript-mode))
 
 (defun setup-tide-mode ()
+  (my/use-tsc-from-node-modules)
   (interactive)
   (tide-setup)
   (flycheck-mode +1)
