@@ -75,6 +75,15 @@
 
 ;; aligns annotation to the right hand side
 (setq company-tooltip-align-annotations t)
+(defun eslint-fix-file ()
+  (message "eslint --fixing the file" (buffer-file-name))
+  (shell-command (concat flycheck-javascript-eslint-executable " --fix " (buffer-file-name))))
+
+(defun eslint-fix ()
+  (interactive)
+  (eslint-fix-file)
+  (revert-buffer t t))
+
 
 ;; formats the buffer before saving
 ;; -- nope -- Let prettier do it
