@@ -84,6 +84,7 @@
 (add-hook 'typescript-mode-hook #'my/use-prettier-from-node-modules)
 (add-hook 'typescript-mode-hook #'my/use-eslint-from-node-modules)
 (add-hook 'typescript-mode-hook 'prettier-js-mode)
+(add-hook 'typescript-mode-hook 'fci-mode)
 
 (setq typescript-indent-level 2)
 
