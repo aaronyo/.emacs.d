@@ -189,3 +189,7 @@ your recently and most frequently used commands.")
   (add-hook 'company-completion-cancelled-hook 'company-maybe-turn-on-fci)
   ;; end: fix fxi alignment conflict
   )
+
+(use-package distinguished-theme
+  :config
+  (load-theme 'distinguished t))
