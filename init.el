@@ -144,7 +144,7 @@ your recently and most frequently used commands.")
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (elisp-slime-nav use-package prettier-js flycheck tide company flycheck-ghcmod haskell-mode smex rjsx-mode projectile neotree multiple-cursors markdown-mode json-mode ido-grid-mode git-gutter flx-ido fill-column-indicator context-coloring)))
+    (rainbow-delimiters elisp-slime-nav use-package prettier-js flycheck tide company flycheck-ghcmod haskell-mode smex rjsx-mode projectile neotree multiple-cursors markdown-mode json-mode ido-grid-mode git-gutter flx-ido fill-column-indicator context-coloring)))
  '(standard-indent 2))
 
 (global-set-key [f8] 'neotree-toggle)
@@ -193,3 +193,7 @@ your recently and most frequently used commands.")
 (use-package distinguished-theme
   :config
   (load-theme 'distinguished t))
+
+(use-package rainbow-delimiters
+  :init
+    (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode))
