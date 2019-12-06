@@ -67,7 +67,9 @@
   (setq flycheck-check-syntax-automatically '(save mode-enabled))
   (eldoc-mode +1)
   (tide-hl-identifier-mode +1)
-  (flycheck-add-next-checker 'typescript-tide 'javascript-eslint)
+  (if (not (member 'javascript-eslint (flycheck-checker-get 'typescript-tide 'next-checkers)))
+           (flycheck-add-next-checker 'typescript-tide 'javascript-eslint)
+    nil)
   ;; company is an optional dependency. You have to
   ;; install it separately via package-install
   ;; `M-x package-install [ret] company`
