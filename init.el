@@ -1,14 +1,52 @@
-;; Add package repos
+;;; init-use-package.el --- Get started with use-package in emacs
 
-;; Added by Package.el.  This must come before configurations of
-;; installed packages.  Don't delete this line.  If you don't want it,
-;; just comment it out by adding a semicolon to the start of the line.
-;; You may delete these explanatory comments.
+;; Copyright (C) 2015 Gregory J Stein
+
+;; Author: Gregory J Stein <gregory.j.stein@gmail.com>
+;; Keywords: use-package
+;; License: none, use this however you want without citation
+;;
+
+;; Code inspired by:
+;;      http://stackoverflow.com/a/10093312/3672986
+;;      http://www.lunaryorn.com/2015/01/06/my-emacs-configuration-with-use-package.html
+;;      https://github.com/jwiegley/use-package
+
+
+;;; Commentary:
+
+;; As Sebastian Wiesner from http://www.lunaryorn.com/ points out, there is a "chicken
+;; and egg" problem with use-package, which is capable of automatically downloading and
+;; installing packages, but otherwise needs to be downloaded and installed manually.
+;; I include the following code in my emacs initialization file so that this process
+;; is automatic.
+
+
+;;; Code:
+
+;; Update package-archive lists
+(require 'package)
+(setq package-enable-at-startup nil)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
 (package-initialize)
 
-(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
-                         ("marmalade" . "https://marmalade-repo.org/packages/")
-                         ("melpa" . "https://melpa.org/packages/")))
+;; Install 'use-package' if necessary
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+;; Enable use-package
+(eval-when-compile
+  (require 'use-package))
+
+;;; init-use-package.el ends here
+
+(require 'use-package-ensure)
+(setq use-package-always-ensure t)
+
+
 
 (setq dired-use-ls-dired nil)
 
@@ -44,7 +82,7 @@
 (column-number-mode 1)
 
 ;; Highlight matching paren
-(show-paren-mode 1)
+;;(show-paren-mode 1)
 
 ;; Kill trailing white space
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
@@ -112,7 +150,7 @@ your recently and most frequently used commands.")
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (prettier-js flycheck tide company flycheck-ghcmod haskell-mode smex rjsx-mode projectile neotree multiple-cursors markdown-mode json-mode ido-grid-mode git-gutter flx-ido fill-column-indicator context-coloring)))
+    (elisp-slime-nav use-package prettier-js flycheck tide company flycheck-ghcmod haskell-mode smex rjsx-mode projectile neotree multiple-cursors markdown-mode json-mode ido-grid-mode git-gutter flx-ido fill-column-indicator context-coloring)))
  '(standard-indent 2))
 
 (global-set-key [f8] 'neotree-toggle)
@@ -130,3 +168,26 @@ your recently and most frequently used commands.")
 
 (setq interprogram-cut-function 'paste-to-osx)
 (setq interprogram-paste-function 'copy-from-osx)
+
+(use-package elisp-slime-nav)
+
+(use-package company
+  :config
+  (add-hook 'after-init-hook 'global-company-mode)
+  ;; begin: fix fxi alignment conflict
+  ;; https://github.com/company-mode/company-mode/issues/180
+  (defvar-local company-fci-mode-on-p nil)
+
+  (defun company-turn-off-fci (&rest ignore)
+    (when (boundp 'fci-mode)
+      (setq company-fci-mode-on-p fci-mode)
+      (when fci-mode (fci-mode -1))))
+
+  (defun company-maybe-turn-on-fci (&rest ignore)
+    (when company-fci-mode-on-p (fci-mode 1)))
+
+  (add-hook 'company-completion-started-hook 'company-turn-off-fci)
+  (add-hook 'company-completion-finished-hook 'company-maybe-turn-on-fci)
+  (add-hook 'company-completion-cancelled-hook 'company-maybe-turn-on-fci)
+  ;; end: fix fxi alignment conflict
+  )
