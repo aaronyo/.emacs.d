@@ -123,20 +123,6 @@ your recently and most frequently used commands.")
 
 (load-library "setup-js-editing")
 
-;; Custom colors
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(context-coloring-level-0-face ((t (:foreground "color-255"))))
- '(context-coloring-level-1-face ((t (:foreground "color-81"))))
- '(context-coloring-level-2-face ((t (:foreground "color-175"))))
- '(context-coloring-level-3-face ((t (:foreground "color-42"))))
- '(context-coloring-level-4-face ((t (:foreground "color-27"))))
- '(context-coloring-level-5-face ((t (:foreground "color-92"))))
- '(context-coloring-level-6-face ((t (:foreground "color-23")))))
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -190,10 +176,22 @@ your recently and most frequently used commands.")
   ;; end: fix fxi alignment conflict
   )
 
-(use-package distinguished-theme
+(use-package zenburn-theme
   :config
-  (load-theme 'distinguished t))
+  (setq zenburn-override-colors-alist
+        '(("zenburn-bg"    . "#000000")
+          ("zenburn-bg-1"  . "#444444")
+          ("zenburn-bg-1"  . "#444444")
+          ("zenburn-bg+1"  . "#222222")
+          ("zenburn-bg-05" . "#222222")
+          ("zenburn-bg-0" . "#222222")
+          ("zenburn-red-1" . "#ff4444")
+          ))
+  (load-theme 'zenburn t))
+
 
 (use-package rainbow-delimiters
   :init
     (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode))
+
+(menu-bar-mode -1)
