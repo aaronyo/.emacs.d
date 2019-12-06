@@ -129,19 +129,13 @@ your recently and most frequently used commands.")
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(col-highlight ((t (:background "color-233"))))
  '(context-coloring-level-0-face ((t (:foreground "color-255"))))
  '(context-coloring-level-1-face ((t (:foreground "color-81"))))
  '(context-coloring-level-2-face ((t (:foreground "color-175"))))
  '(context-coloring-level-3-face ((t (:foreground "color-42"))))
  '(context-coloring-level-4-face ((t (:foreground "color-27"))))
  '(context-coloring-level-5-face ((t (:foreground "color-92"))))
- '(context-coloring-level-6-face ((t (:foreground "color-23"))))
- '(font-lock-comment-face ((t (:foreground "color-95"))))
- '(hl-line ((t (:background "color-233"))))
- '(lazy-highlight ((t (:background "black" :foreground "white" :underline t))))
- '(neo-dir-link-face ((t (:foreground "cyan"))))
- '(neo-file-link-face ((t (:foreground "white")))))
+ '(context-coloring-level-6-face ((t (:foreground "color-23")))))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
