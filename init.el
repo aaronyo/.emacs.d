@@ -182,10 +182,14 @@ your recently and most frequently used commands.")
         '(("zenburn-bg"    . "#000000")
           ("zenburn-bg-1"  . "#444444")
           ("zenburn-bg+1"  . "#222222")
-          ("zenburn-bg-05" . "#222222")
+          ("zenburn-bg-05" . "#111111")
           ("zenburn-red-1" . "#ff4444")
           ))
-  (load-theme 'zenburn t))
+  (load-theme 'zenburn t)
+  (custom-theme-set-faces
+   'zenburn
+   `(highlight ((t (:background , "#444444")))))
+  )
 
 
 (use-package rainbow-delimiters
