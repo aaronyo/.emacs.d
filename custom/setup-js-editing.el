@@ -75,8 +75,6 @@
   ;; `M-x package-install [ret] company`
   (company-mode +1))
 
-;; aligns annotation to the right hand side
-(setq company-tooltip-align-annotations t)
 (defun eslint-fix-file ()
   (message "eslint --fixing the file" (buffer-file-name))
   (shell-command (concat flycheck-javascript-eslint-executable " --fix " (buffer-file-name))))

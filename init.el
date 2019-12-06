@@ -174,6 +174,10 @@ your recently and most frequently used commands.")
 (use-package company
   :config
   (add-hook 'after-init-hook 'global-company-mode)
+
+  ;; align annotation to the right hand side
+  (setq company-tooltip-align-annotations t)
+
   ;; begin: fix fxi alignment conflict
   ;; https://github.com/company-mode/company-mode/issues/180
   (defvar-local company-fci-mode-on-p nil)
