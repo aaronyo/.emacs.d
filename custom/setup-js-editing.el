@@ -6,13 +6,8 @@
 (add-to-list 'auto-mode-alist '("\\.jsx\\'" . rjsx-mode))
 (add-to-list 'auto-mode-alist '("\\.json\\'" . json-mode))
 
-(add-hook 'js2-mode-hook 'flycheck-mode)
-(add-hook 'js2-mode-hook 'fci-mode)
-
-(add-hook 'rjsx-mode-hook 'flycheck-mode)
-
-;; (add-hook 'rjsx-mode-hook 'fci-mode)
-
+(with-eval-after-load 'flycheck
+  (flycheck-add-mode 'javascript-eslint 'typescript-mode))
 
 (defun my/find-dominating (rel-path)
   (let* ((root (locate-dominating-file
@@ -23,31 +18,25 @@
                                         root))))
     full-path))
 
-;; Set eslint executable based on buffer
 (defun my/use-dominating-eslint ()
   (setq-local flycheck-javascript-eslint-executable (my/find-dominating "bin/eslint")))
 
-(add-hook 'flycheck-mode-hook #'my/use-dominating-eslint)
-
-;; Set prettier executable based on buffer
 (defun my/use-dominating-prettier ()
   (setq-local prettier-js-command (my/find-dominating "bin/prettier")))
 
-(add-hook 'js2-mode-hook #'my/use-dominating-prettier)
-(add-hook 'rjsx-mode-hook #'my/use-dominating-prettier)
-
-;;
-;; Tide and typescript for esling
-;;
-
-;; Set prettier executable based on buffer
 (defun my/use-dominating-tsserver ()
   (setq-local tide-tsserver-executable (my/find-dominating "bin/tsserver")))
 
-(with-eval-after-load 'flycheck
-  (flycheck-add-mode 'javascript-eslint 'typescript-mode))
+(defun my/setup-js2-mode ()
+  (flycheck-mode +1)
+  (fci-mode +1)
+  (prettier-js-mode +1)
+  (context-coloring-mode +1)
+  (my/use-dominating-eslint)
+  (my/use-dominating-prettier)
+  )
 
-(defun setup-tide-mode ()
+(defun my/setup-tide-mode ()
   (my/use-dominating-tsserver)
   (interactive)
   (tide-setup)
@@ -58,48 +47,33 @@
   (if (not (member 'javascript-eslint (flycheck-checker-get 'typescript-tide 'next-checkers)))
            (flycheck-add-next-checker 'typescript-tide 'javascript-eslint)
     nil)
-  ;; company is an optional dependency. You have to
-  ;; install it separately via package-install
-  ;; `M-x package-install [ret] company`
-  (company-mode +1))
+  (company-mode +1)
+  (my/use-dominating-prettier)
+  (my/use-dominating-eslint)
+  (prettier-js-mode +1)
+  (fci-mode +1)
+  )
 
-(defun eslint-fix-file ()
+
+;; eslint --fix is too slow to run with every save
+(defun my/eslint-fix-file ()
   (message "eslint --fixing the file" (buffer-file-name))
   (shell-command (concat flycheck-javascript-eslint-executable " --fix " (buffer-file-name))))
 
 (defun eslint-fix ()
   (interactive)
-  (eslint-fix-file)
+  (my/eslint-fix-file)
   (revert-buffer t t))
 
-
-;; formats the buffer before saving
-;; -- nope -- Let prettier do it
-;; (add-hook 'before-save-hook 'tide-format-before-save)
-
-(add-hook 'typescript-mode-hook #'setup-tide-mode)
-(add-hook 'typescript-mode-hook #'my/use-dominating-prettier)
-(add-hook 'typescript-mode-hook #'my/use-dominating-eslint)
-(add-hook 'typescript-mode-hook 'prettier-js-mode)
-(add-hook 'typescript-mode-hook 'fci-mode)
+(add-hook 'js2-mode-hook #'my/setup-js2-mode)
+(add-hook 'typescript-mode-hook #'my/setup-tide-mode)
+(add-hook 'rjsx-mode-hook #'my/setup-js2-mode)
 
 (setq typescript-indent-level 2)
-
-
-;;(require 'prettier-js)
-(add-hook 'js2-mode-hook 'prettier-js-mode)
-(add-hook 'rjsx-mode-hook 'prettier-js-mode)
-
-;; (add-hook 'prettier-js-mode
-;;           (lambda ()
-;;             (add-hook 'before-save-hook 'prettier-before-save)))
 
 ;; Context coloring
 ;; A string color that is neutral when context coloring
 (set-face-foreground 'font-lock-string-face "color-246")
-
-;; Hook for js2-mode
-(add-hook 'js2-mode-hook 'context-coloring-mode)
 
 (setq
  ;; Leave the error highlighting to ESLint
@@ -117,7 +91,5 @@
  fci-rule-column 80
  fci-rule-character ?|
  fci-rule-color "color-236"
-
-;; prettier-target-mode "prettier-js-mode"
 
  )
