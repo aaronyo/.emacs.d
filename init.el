@@ -129,8 +129,10 @@ your recently and most frequently used commands.")
     (magit rainbow-delimiters elisp-slime-nav use-package prettier-js flycheck tide company flycheck-ghcmod haskell-mode smex rjsx-mode projectile neotree multiple-cursors markdown-mode json-mode ido-grid-mode git-gutter flx-ido fill-column-indicator context-coloring)))
  '(standard-indent 2))
 
+(use-package neotree)
 (global-set-key [f8] 'neotree-toggle)
 (global-set-key [f9] 'neotree-find)
+(add-hook 'after-init-hook #'neotree-toggle)
 
 ;; osx clipboard integration
 (defun copy-from-osx ()
