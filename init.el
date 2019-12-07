@@ -201,8 +201,8 @@ your recently and most frequently used commands.")
     (set-display-table-slot display-table 'vertical-border (make-glyph-code ?│))
     (set-window-display-table (selected-window) display-table)))
 
-;; (add-hook 'after-init-hook #'my/init-window-divider)
-;; (add-hook 'fci-mode-hook #'my/change-window-divider)
+(add-hook 'after-init-hook #'my/init-window-divider)
+(add-hook 'fci-mode-hook #'my/change-window-divider)
 
 (use-package rainbow-delimiters
   :init
