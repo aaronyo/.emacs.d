@@ -190,7 +190,7 @@ your recently and most frequently used commands.")
    `(highlight ((t (:background , "#444444")))))
   (set-face-foreground 'vertical-border "black")
   (setq fci-rule-character ?│)
-  (setq fci-rule-color "#222222")
+  (setq fci-rule-color "#352028")
 )
 
  (defun my/change-window-divider ()
