@@ -106,11 +106,7 @@ your recently and most frequently used commands.")
 (add-hook 'after-init-hook #'projectile-global-mode)
 (global-set-key (kbd "C-x t") 'projectile-find-file)
 
-;; Window navigation
-(global-set-key (kbd "ESC <left>") 'windmove-left)
-(global-set-key (kbd "ESC <right>") 'windmove-right)
-(global-set-key (kbd "ESC <up>") 'windmove-up)
-(global-set-key (kbd "ESC <down>") 'windmove-down)
+(windmove-default-keybindings)
 
 ;; Multiple cursors
 (global-set-key (kbd "^[ >") 'mc/mark-next-like-this)
