@@ -175,20 +175,31 @@ your recently and most frequently used commands.")
   )
 
 (use-package zenburn-theme
-  :config
+  :init
   (setq zenburn-override-colors-alist
-        '(("zenburn-bg"    . "#000000")
+        '(("zenburn-bg"    . "#111111")
           ("zenburn-bg-1"  . "#444444")
           ("zenburn-bg+1"  . "#222222")
           ("zenburn-bg-05" . "#111111")
           ("zenburn-red-1" . "#ff4444")
           ))
+  :config
   (load-theme 'zenburn t)
   (custom-theme-set-faces
    'zenburn
    `(highlight ((t (:background , "#444444")))))
-  )
+  (set-face-foreground 'vertical-border "black")
+  (setq fci-rule-character ?│)
+  (setq fci-rule-color "#222222")
+)
 
+ (defun my/change-window-divider ()
+  (let ((display-table (or buffer-display-table standard-display-table)))
+    (set-display-table-slot display-table 'vertical-border (make-glyph-code ?│))
+    (set-window-display-table (selected-window) display-table)))
+
+(add-hook 'emacs-startup-hook #'my/change-window-divider)
+(add-hook 'fci-mode-hook #'my/change-window-divider)
 
 (use-package rainbow-delimiters
   :init

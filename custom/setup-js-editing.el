@@ -89,7 +89,4 @@
  json-reformat:pretty-string\? t
 
  fci-rule-column 80
- fci-rule-character ?|
- fci-rule-color "color-236"
-
  )
