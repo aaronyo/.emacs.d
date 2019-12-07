@@ -193,13 +193,16 @@ your recently and most frequently used commands.")
   (setq fci-rule-color "#352028")
 )
 
- (defun my/change-window-divider ()
+ (defun my/init-window-divider ()
+    (set-display-table-slot standard-display-table 'vertical-border (make-glyph-code ?│)))
+
+(defun my/change-window-divider ()
   (let ((display-table (or buffer-display-table standard-display-table)))
     (set-display-table-slot display-table 'vertical-border (make-glyph-code ?│))
     (set-window-display-table (selected-window) display-table)))
 
-(add-hook 'emacs-startup-hook #'my/change-window-divider)
-(add-hook 'fci-mode-hook #'my/change-window-divider)
+;; (add-hook 'after-init-hook #'my/init-window-divider)
+;; (add-hook 'fci-mode-hook #'my/change-window-divider)
 
 (use-package rainbow-delimiters
   :init
