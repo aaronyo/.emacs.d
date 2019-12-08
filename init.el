@@ -46,10 +46,6 @@
 (require 'use-package-ensure)
 (setq use-package-always-ensure t)
 
-
-
-(setq dired-use-ls-dired nil)
-
 ;; ido and flx-ido
 (add-hook 'after-init-hook
 	  (lambda()
