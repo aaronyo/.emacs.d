@@ -1,3 +1,11 @@
+(setq lexical-binding t)
+
+;; Backup file setup
+(setq backup-directory-alist
+      `((".*" . ,temporary-file-directory)))
+(setq auto-save-file-name-transforms
+                `((".*" ,temporary-file-directory t)))
+
 ;;; init-use-package.el --- Get started with use-package in emacs
 
 ;; Copyright (C) 2015 Gregory J Stein
@@ -43,6 +51,10 @@
 
 ;;; init-use-package.el ends here
 
+(let ((script-dir (file-name-directory load-file-name)))
+  (load-library (concat script-dir "custom/setup-js-editing"))
+  )
+
 (require 'use-package-ensure)
 (setq use-package-always-ensure t)
 
@@ -77,23 +89,14 @@
   ))
 
 ;; Auto Save setup
-(setq backup-directory-alist
-      `((".*" . ,temporary-file-directory)))
-(setq auto-save-file-name-transforms
-                `((".*" ,temporary-file-directory t)))
-(add-to-list 'load-path "~/.emacs.d/3p/")
-(add-to-list 'load-path "~/.emacs.d/custom/")
+(custom-set-default 'backup-directory-alist
+                    `((".*" . ,temporary-file-directory)))
+(custom-set-default 'auto-save-file-name-transforms
+                    `((".*" ,temporary-file-directory t)))
 
-;; git gutter
-(add-hook 'after-init-hook
-	  (lambda()
-            (global-git-gutter-mode +1)))
-
-;; Backup file setup
-(setq backup-directory-alist
-      `((".*" . ,temporary-file-directory)))
-(setq auto-save-file-name-transforms
-                `((".*" ,temporary-file-directory t)))
+(use-package git-gutter
+  :config
+  (global-git-gutter-mode +1))
 
 ;; Show column numbers
 (column-number-mode 1)
@@ -122,26 +125,34 @@ your recently and most frequently used commands.")
 
 ;; Projectile
 ;; (setq projectile-enable-caching t)
-(add-hook 'after-init-hook #'projectile-mode)
-(global-set-key (kbd "C-x t") 'projectile-find-file)
+(use-package projectile
+  :config
+  (projectile-mode +1)
+  :bind
+  (("C-x t" . 'projectile-find-file)))
 
+;; Use shift-<arrow> to navigate windows
 (windmove-default-keybindings)
 
-;; Multiple cursors
-(global-set-key (kbd "^[ >") 'mc/mark-next-like-this)
-(global-set-key (kbd "^[ <") 'mc/mark-previous-like-this)
-(global-set-key (kbd "C-c ^[ <") 'mc/mark-all-like-this)
+(use-package multiple-cursors
+  :bind
+  (("^[ >" . 'mc/mark-next-like-this)
+   ("^[ <" . 'mc/mark-previous-like-this)
+   ("C-c ^[ <" . 'mc/mark-all-like-this))
+  )
 
 ;; Commenting regions
 (global-set-key (kbd "C-x /") 'comment-region)
 (global-set-key (kbd "C-x \\") 'uncomment-region)
 
-(load-library "setup-js-editing")
 
-(use-package neotree)
-(global-set-key [f8] 'neotree-toggle)
-(global-set-key [f9] 'neotree-find)
-(add-hook 'after-init-hook #'neotree-toggle)
+(use-package neotree
+  :bind
+  (("<f8>" . 'neotree-toggle)
+   ("<f9>" . 'neotree-find))
+  :config
+  (neotree-toggle)
+  )
 
 ;; osx clipboard integration
 (defun copy-from-osx ()
@@ -239,9 +250,6 @@ your recently and most frequently used commands.")
 
 (custom-set-default 'checkdoc-force-docstrings-flag nil)
 
- (provide 'init)
-;;; init.el ends here
-
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -270,3 +278,6 @@ your recently and most frequently used commands.")
    (quote
     (magit rainbow-delimiters elisp-slime-nav use-package prettier-js flycheck tide company flycheck-ghcmod haskell-mode smex rjsx-mode projectile neotree multiple-cursors markdown-mode json-mode ido-grid-mode git-gutter flx-ido fill-column-indicator context-coloring)))
  '(standard-indent 2))
+
+ (provide 'init)
+;;; init.el ends here
