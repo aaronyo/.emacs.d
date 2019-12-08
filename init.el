@@ -185,8 +185,22 @@ your recently and most frequently used commands.")
   ;; end: fix fxi alignment conflict
   )
 
+(defun my/init-window-divider ()
+  (set-display-table-slot standard-display-table 'vertical-border (make-glyph-code ?│)))
+
+(defun my/update-window-divider ()
+  (let ((display-table (or buffer-display-table standard-display-table)))
+    (set-display-table-slot display-table 'vertical-border (make-glyph-code ?│))
+    (set-window-display-table (selected-window) display-table)))
+
+(add-hook 'fci-mode-hook #'my/update-window-divider)
+
 (use-package zenburn-theme
+  :custom
+  (fci-rule-character ?│)
+  (fci-rule-color "#352028")
   :init
+  (my/init-window-divider)
   (setq zenburn-override-colors-alist
         '(("zenburn-bg"    . "#111111")
           ("zenburn-bg-1"  . "#444444")
@@ -200,26 +214,8 @@ your recently and most frequently used commands.")
    'zenburn
    `(highlight ((t (:background , "#444444")))))
   (set-face-foreground 'vertical-border "black")
-  (setq fci-rule-character ?│)
-  (setq fci-rule-color "#352028")
 )
 
- (defun my/init-window-divider ()
-    (set-display-table-slot standard-display-table 'vertical-border (make-glyph-code ?│)))
-
-(defun my/change-window-divider ()
-  (let ((display-table (or buffer-display-table standard-display-table)))
-    (set-display-table-slot display-table 'vertical-border (make-glyph-code ?│))
-    (set-window-display-table (selected-window) display-table)))
-
-(add-hook 'after-init-hook #'my/init-window-divider)
-(add-hook 'fci-mode-hook #'my/change-window-divider)
-
-(use-package rainbow-delimiters
-  :init
-    (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode))
-
-(menu-bar-mode -1)
 
 (use-package magit
   :bind
