@@ -237,7 +237,9 @@ your recently and most frequently used commands.")
 (add-hook 'prog-mode-hook 'fci-mode)
 (add-hook 'emacs-lisp-mode-hook #'my/setup-emacs-lisp-mode)
 
-(provide 'init)
+(custom-set-default 'checkdoc-force-docstrings-flag nil)
+
+ (provide 'init)
 ;;; init.el ends here
 
 (custom-set-faces
@@ -247,12 +249,12 @@ your recently and most frequently used commands.")
  ;; If there is more than one, they won't work right.
  )
 
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(checkdoc-force-docstrings-flag f)
  '(company-begin-commands (quote (self-insert-command)))
  '(company-idle-delay 0.1)
  '(company-minimum-prefix-length 2)
