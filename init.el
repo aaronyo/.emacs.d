@@ -222,5 +222,16 @@ your recently and most frequently used commands.")
   (("C-x g" . 'magit-status))
 )
 
+(use-package rainbow-delimiters)
+
+
+(defun my/setup-emacs-lisp-mode ()
+  "Seteup 'emacs-lisp-mode'."
+  (rainbow-delimiters-mode +1)
+  (flycheck-mode +1))
+
+(add-hook 'prog-mode-hook 'fci-mode)
+(add-hook 'emacs-lisp-mode-hook #'my/setup-emacs-lisp-mode)
+
 (provide 'init)
 ;;; init.el ends here
