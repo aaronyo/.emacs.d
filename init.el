@@ -18,7 +18,7 @@
 ;; As Sebastian Wiesner from http://www.lunaryorn.com/ points out, there is a "chicken
 ;; and egg" problem with use-package, which is capable of automatically downloading and
 ;; installing packages, but otherwise needs to be downloaded and installed manually.
-;; I include the following code in my emacs initialization file so that this process
+;; I include the following code in my Emacs initialization file so that this process
 ;; is automatic.
 
 
