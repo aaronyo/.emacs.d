@@ -214,3 +214,6 @@ your recently and most frequently used commands.")
   :bind
   (("C-x g" . 'magit-status))
 )
+
+(provide 'init)
+;;; init.el ends here
