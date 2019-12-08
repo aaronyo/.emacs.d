@@ -84,6 +84,8 @@
 ;; Highlight matching paren
 (show-paren-mode 1)
 
+(menu-bar-mode -1)
+
 ;; Kill trailing white space
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
