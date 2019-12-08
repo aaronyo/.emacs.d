@@ -129,7 +129,10 @@ your recently and most frequently used commands.")
  '(package-selected-packages
    (quote
     (magit rainbow-delimiters elisp-slime-nav use-package prettier-js flycheck tide company flycheck-ghcmod haskell-mode smex rjsx-mode projectile neotree multiple-cursors markdown-mode json-mode ido-grid-mode git-gutter flx-ido fill-column-indicator context-coloring)))
- '(standard-indent 2))
+ '(standard-indent 2)
+ '(checkdoc-force-docstrings-flag f)
+ '(dired-use-ls-dired nil)
+ )
 
 (use-package neotree)
 (global-set-key [f8] 'neotree-toggle)
