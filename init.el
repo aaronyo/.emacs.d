@@ -155,12 +155,18 @@ your recently and most frequently used commands.")
 (use-package elisp-slime-nav)
 
 (use-package company
-  :config
-  (add-hook 'after-init-hook 'global-company-mode)
-
   ;; align annotation to the right hand side
-  (setq company-tooltip-align-annotations t)
+  :custom
+  (company-begin-commands '(self-insert-command))
+  (company-idle-delay .1)
+  (company-minimum-prefix-length 2)
+  (company-show-numbers t)
+  (company-tooltip-align-annotations 't)
+  (global-company-mode t)
 
+  :hook 'after-init-hook
+
+  :init
   ;; begin: fix fxi alignment conflict
   ;; https://github.com/company-mode/company-mode/issues/180
   (defvar-local company-fci-mode-on-p nil)
