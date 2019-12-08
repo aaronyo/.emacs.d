@@ -47,17 +47,34 @@
 (setq use-package-always-ensure t)
 
 ;; ido and flx-ido
-(add-hook 'after-init-hook
-	  (lambda()
-	    (ido-mode 1)
-	    (ido-everywhere 1)
-	    (flx-ido-mode 1)
-	    ;; disable ido faces to see flx highlights.
-	    ;; (custom-set-default 'ido-use-faces nil)
-            (custom-set-variables
-             '(ido-use-filename-at-point 'guess)
-             '(ido-file-extensions-order (".ts" ".js"))
-            )))
+(use-package ido
+  :hook 'after-init-hook
+  :config
+  (ido-mode +1)
+  (ido-everywhere +1)
+  (flx-ido-mode +1)
+  ;;disable ido faces to see flx highlights.
+  (custom-set-default 'ido-use-faces nil)
+  (custom-set-variables
+   '(ido-use-filename-at-point 'guess)
+   '(ido-file-extensions-order '(".ts" ".js")
+                               ))
+  )
+
+(use-package ido-completing-read+
+  :config
+  (ido-ubiquitous-mode +1))
+
+(use-package amx
+  :config
+  (amx-mode +1))
+
+(use-package ido-vertical-mode
+  :config
+  (ido-vertical-mode +1)
+  (custom-set-variables
+   '(ido-vertical-define-keys 'C-n-C-p-up-down-left-right)
+  ))
 
 ;; Auto Save setup
 (setq backup-directory-alist
@@ -120,19 +137,6 @@ your recently and most frequently used commands.")
 (global-set-key (kbd "C-x \\") 'uncomment-region)
 
 (load-library "setup-js-editing")
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (magit rainbow-delimiters elisp-slime-nav use-package prettier-js flycheck tide company flycheck-ghcmod haskell-mode smex rjsx-mode projectile neotree multiple-cursors markdown-mode json-mode ido-grid-mode git-gutter flx-ido fill-column-indicator context-coloring)))
- '(standard-indent 2)
- '(checkdoc-force-docstrings-flag f)
- '(dired-use-ls-dired nil)
- )
 
 (use-package neotree)
 (global-set-key [f8] 'neotree-toggle)
@@ -235,3 +239,32 @@ your recently and most frequently used commands.")
 
 (provide 'init)
 ;;; init.el ends here
+
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(checkdoc-force-docstrings-flag f)
+ '(company-begin-commands (quote (self-insert-command)))
+ '(company-idle-delay 0.1)
+ '(company-minimum-prefix-length 2)
+ '(company-show-numbers t)
+ '(company-tooltip-align-annotations t)
+ '(dired-use-ls-dired nil)
+ '(fci-rule-character 9474)
+ '(fci-rule-color "#352028")
+ '(global-company-mode t)
+ '(ido-file-extensions-order (quote (".ts" ".js")))
+ '(ido-use-filename-at-point (quote guess))
+ '(package-selected-packages
+   (quote
+    (magit rainbow-delimiters elisp-slime-nav use-package prettier-js flycheck tide company flycheck-ghcmod haskell-mode smex rjsx-mode projectile neotree multiple-cursors markdown-mode json-mode ido-grid-mode git-gutter flx-ido fill-column-indicator context-coloring)))
+ '(standard-indent 2))
