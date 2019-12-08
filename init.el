@@ -53,7 +53,11 @@
 	    (ido-everywhere 1)
 	    (flx-ido-mode 1)
 	    ;; disable ido faces to see flx highlights.
-	    (setq ido-use-faces nil)))
+	    ;; (custom-set-default 'ido-use-faces nil)
+            (custom-set-variables
+             '(ido-use-filename-at-point 'guess)
+             '(ido-file-extensions-order (".ts" ".js"))
+            )))
 
 ;; Auto Save setup
 (setq backup-directory-alist
