@@ -82,7 +82,7 @@
 (column-number-mode 1)
 
 ;; Highlight matching paren
-;;(show-paren-mode 1)
+(show-paren-mode 1)
 
 ;; Kill trailing white space
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
