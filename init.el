@@ -105,7 +105,7 @@ your recently and most frequently used commands.")
 
 ;; Projectile
 ;; (setq projectile-enable-caching t)
-(add-hook 'after-init-hook #'projectile-global-mode)
+(add-hook 'after-init-hook #'projectile-mode)
 (global-set-key (kbd "C-x t") 'projectile-find-file)
 
 (windmove-default-keybindings)
