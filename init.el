@@ -278,7 +278,7 @@ your recently and most frequently used commands.")
  '(ido-use-filename-at-point (quote guess))
  '(package-selected-packages
    (quote
-    (magit rainbow-delimiters elisp-slime-nav use-package prettier-js flycheck tide company flycheck-ghcmod haskell-mode smex rjsx-mode projectile neotree multiple-cursors markdown-mode json-mode ido-grid-mode git-gutter flx-ido fill-column-indicator context-coloring)))
+    (prettier-js tide company flycheck-ghcmod haskell-mode smex rjsx-mode projectile neotree multiple-cursors markdown-mode json-mode ido-grid-mode git-gutter flx-ido fill-column-indicator context-coloring)))
  '(standard-indent 2))
 
  (provide 'init)
