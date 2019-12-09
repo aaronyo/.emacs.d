@@ -191,7 +191,6 @@ your recently and most frequently used commands.")
           ("zenburn-bg-1"  . "#444444")
           ("zenburn-bg+1"  . "#222222")
           ("zenburn-bg-05" . "#111111")
-          ("zenburn-red-1" . "#ff4444")
           ))
   :config
   (load-theme 'zenburn t)
@@ -199,6 +198,8 @@ your recently and most frequently used commands.")
    'zenburn
    `(highlight ((t (:background , "#444444")))))
   (set-face-foreground 'vertical-border "black")
+  (set-face-foreground 'flycheck-error "#ff4444")
+  (set-face-foreground 'flycheck-warning "#ffdd44")
 )
 
 
