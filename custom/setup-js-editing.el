@@ -47,7 +47,6 @@
 
 (defun my/setup-tide-mode ()
   (my/use-dominating-tsserver)
-  (interactive)
   (tide-setup)
   (flycheck-mode +1)
   (setq flycheck-check-syntax-automatically '(save mode-enabled))
