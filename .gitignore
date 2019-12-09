@@ -7,3 +7,6 @@ projectile-bookmarks.eld
 projectile.cache
 smex-items
 transient/
+eshell/
+auto-save-list/
+lisp/generated-customizations.el

@@ -6,12 +6,14 @@
 ;;; Code:
 (setq lexical-binding t)
 (add-to-list 'load-path "~/.emacs.d/lisp")
+(custom-set-default 'custom-file "lisp/generated-customizations.el")
 
-(load-library "3p/init-use-package")
+(load "3p/init-use-package")
 (require 'use-package-ensure)
 (custom-set-default 'use-package-always-ensure t)
 
-(load-library "my/setup-js-editing")
+(load "my/setup-js-editing")
+(load "generated-customizations" t)
 
 ;; Backup file setup
 (setq backup-directory-alist
@@ -218,35 +220,4 @@ your recently and most frequently used commands.")
 
 (custom-set-default 'checkdoc-force-docstrings-flag nil)
 
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(company-begin-commands (quote (self-insert-command)))
- '(company-idle-delay 0.1)
- '(company-minimum-prefix-length 2)
- '(company-show-numbers t)
- '(company-tooltip-align-annotations t)
- '(dired-use-ls-dired nil)
- '(fci-rule-character 9474)
- '(fci-rule-color "#352028")
- '(global-company-mode t)
- '(ido-file-extensions-order (quote (".ts" ".js")))
- '(ido-use-filename-at-point (quote guess))
- '(ido-vertical-define-keys (quote C-n-C-p-up-down-left-right))
- '(package-selected-packages
-   (quote
-    (flycheck rainbow-delimiters magit zenburn-theme fill-column-indicator company elisp-slime-nav neotree multiple-cursors projectile smex git-gutter ido-vertical-mode amx ido-completing-read+ flx-ido use-package)))
- '(standard-indent 2))
-
- (provide 'init)
 ;;; init.el ends here
