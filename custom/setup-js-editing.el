@@ -23,12 +23,17 @@
                                         root))))
     full-path))
 
+(defvar-local
+  flycheck-javascript-eslint-executable nil)
 (defun my/use-dominating-eslint ()
-  (setq-local flycheck-javascript-eslint-executable (my/find-dominating "bin/eslint")))
+(setq-local
+ flycheck-javascript-eslint-executable (my/find-dominating "bin/eslint")))
 
+(defvar-local prettier-js-command nil)
 (defun my/use-dominating-prettier ()
   (setq-local prettier-js-command (my/find-dominating "bin/prettier")))
 
+(defvar-local tide-tsserver-executable nil)
 (defun my/use-dominating-tsserver ()
   (setq-local tide-tsserver-executable (my/find-dominating "bin/tsserver")))
 
