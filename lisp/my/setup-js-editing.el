@@ -1,4 +1,4 @@
-;;; setup-js-eddint -- configuration for JS and TypesScript editing
+;;; setup-js-editing -- configuration for JS and TypesScript editing
 ;;; Commentary:
 ;;
 
