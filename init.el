@@ -21,10 +21,10 @@
 (setq auto-save-file-name-transforms
                 `((".*" ,temporary-file-directory t)))
 
-
-;; ido and flx-ido
+;; ido
 (use-package ido
   :hook 'after-init-hook
+  :commands ido-everywhere
   :config
   (ido-mode +1)
   (ido-everywhere +1)
