@@ -167,7 +167,9 @@ your recently and most frequently used commands.")
 (setq interprogram-cut-function 'paste-to-osx)
 (setq interprogram-paste-function 'copy-from-osx)
 
-(use-package elisp-slime-nav)
+(use-package elisp-slime-nav
+  :init
+  (add-hook 'emacs-lisp-mode-hook 'elisp-slime-nav-mode))
 
 (use-package company
   ;; align annotation to the right hand side
