@@ -5,6 +5,14 @@
 ;;; Code:
 
 (setq lexical-binding t)
+(custom-set-variables 'use-package-always-ensure t)
+
+(use-package prettier-js)
+(use-package js2-mode)
+(use-package tide)
+(use-package json-mode)
+(use-package context-coloring)
+(use-package tide)
 
 (setq-default indent-tabs-mode nil)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
