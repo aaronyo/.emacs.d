@@ -5,9 +5,12 @@
 
 ;;; Code:
 (setq lexical-binding t)
-
 (add-to-list 'load-path "~/.emacs.d/lisp")
-(load-library "my/init-use-package")
+
+(load-library "3p/init-use-package")
+(require 'use-package-ensure)
+(custom-set-default 'use-package-always-ensure t)
+
 (load-library "my/setup-js-editing")
 
 ;; Backup file setup

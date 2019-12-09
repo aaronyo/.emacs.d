@@ -1,5 +1,5 @@
 ;;; init-use-package.el --- Get started with use-package in emacs
-
+;; source: https://github.com/CachesToCaches/getting_started_with_use_package
 ;; Copyright (C) 2015 Gregory J Stein
 
 ;; Author: Gregory J Stein <gregory.j.stein@gmail.com>
@@ -40,9 +40,5 @@
 ;; Enable use-package
 (eval-when-compile
   (require 'use-package))
-
-;; Aaron Boyd's customizations
-(require 'use-package-ensure)
-(custom-set-default 'use-package-always-ensure t)
 
 ;;; init-use-package.el ends here
