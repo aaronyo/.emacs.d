@@ -74,7 +74,7 @@
 
 ;; eslint --fix is too slow to run with every save
 (defun my/eslint-fix-file ()
-  (message "eslint --fixing the file" (buffer-file-name))
+  (message nil "eslint --fixing the file" (buffer-file-name))
   (shell-command (concat flycheck-javascript-eslint-executable " --fix " (buffer-file-name))))
 
 (defun eslint-fix ()
@@ -100,6 +100,6 @@
 
  json-reformat:indent-width 2
  json-reformat:pretty-string\? t
-
- fci-rule-column 80
  )
+
+;;; setup-js-editing ends here

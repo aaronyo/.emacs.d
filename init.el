@@ -177,12 +177,14 @@ your recently and most frequently used commands.")
     (set-window-display-table (selected-window) display-table)))
 
 (use-package fill-column-indicator
+  :custom
+  (fci-rule-character ?│)
+  (fci-rule-column 80)
   :init
   (add-hook 'fci-mode-hook #'my/update-window-divider))
 
 (use-package zenburn-theme
   :custom
-  (fci-rule-character ?│)
   (fci-rule-color "#352028")
   :init
   (my/init-window-divider)
@@ -200,6 +202,8 @@ your recently and most frequently used commands.")
   (set-face-foreground 'vertical-border "black")
   (set-face-foreground 'flycheck-error "#ff4444")
   (set-face-foreground 'flycheck-warning "#ffdd44")
+  (set-face-foreground 'flycheck-info "#44ff44")
+  (set-face-foreground 'flycheck-warning-overlay "#ffdd44")
 )
 
 
