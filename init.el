@@ -179,8 +179,6 @@ your recently and most frequently used commands.")
   (company-tooltip-align-annotations 't)
   (global-company-mode t)
 
-  :hook 'after-init-hook
-
   :init
   ;; begin: fix fxi alignment conflict
   ;; https://github.com/company-mode/company-mode/issues/180
