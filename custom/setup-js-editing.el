@@ -1,5 +1,10 @@
-;; JS Editing
-;; Use js2-mode for .js files
+;;; setup-js-eddint -- configuration for JS and TypesScript editing
+;;; Commentary:
+;;
+
+;;; Code:
+
+(setq lexical-binding t)
 
 (setq-default indent-tabs-mode nil)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
