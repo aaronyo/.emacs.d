@@ -5,7 +5,7 @@
 ;;; Code:
 
 (setq lexical-binding t)
-(custom-set-variables 'use-package-always-ensure t)
+(custom-set-default 'use-package-always-ensure t)
 
 (use-package prettier-js)
 (use-package js2-mode)
