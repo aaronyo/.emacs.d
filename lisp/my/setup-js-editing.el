@@ -5,6 +5,7 @@
 ;;; Code:
 
 (setq lexical-binding t)
+(require 'flycheck)
 
 (use-package prettier-js)
 (use-package js2-mode)
