@@ -240,7 +240,7 @@ your recently and most frequently used commands.")
 )
 
 (use-package rainbow-delimiters)
-
+(use-package flycheck)
 
 (defun my/setup-emacs-lisp-mode ()
   "Seteup 'emacs-lisp-mode'."
