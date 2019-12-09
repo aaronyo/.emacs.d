@@ -1,3 +1,5 @@
+;;; init.el --- Aaron Boyd's Emacs init file
+
 (setq lexical-binding t)
 
 ;; Backup file setup
