@@ -6,7 +6,7 @@
 ;;; Code:
 (setq lexical-binding t)
 (add-to-list 'load-path "~/.emacs.d/lisp")
-(custom-set-default 'custom-file "lisp/generated-customizations.el")
+(custom-set-default 'custom-file "~/.emacs.d/lisp/generated-customizations.el")
 
 (load "3p/init-use-package")
 (require 'use-package-ensure)
