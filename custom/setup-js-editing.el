@@ -62,13 +62,13 @@
   (fci-mode +1)
   )
 
-
 ;; eslint --fix is too slow to run with every save
 (defun my/eslint-fix-file ()
   (message "eslint --fixing the file" (buffer-file-name))
   (shell-command (concat flycheck-javascript-eslint-executable " --fix " (buffer-file-name))))
 
 (defun eslint-fix ()
+  "Rewrite the current buffer's file using eslint-fix and then revert."
   (interactive)
   (my/eslint-fix-file)
   (revert-buffer t t))
