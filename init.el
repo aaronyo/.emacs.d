@@ -12,9 +12,6 @@
 (require 'use-package-ensure)
 (custom-set-default 'use-package-always-ensure t)
 
-(load "my/setup-js-editing")
-(load "generated-customizations" t)
-
 ;; Backup file setup
 (setq backup-directory-alist
       `((".*" . ,temporary-file-directory)))
@@ -227,5 +224,8 @@ your recently and most frequently used commands.")
 (add-hook 'emacs-lisp-mode-hook #'my/setup-emacs-lisp-mode)
 
 (custom-set-default 'checkdoc-force-docstrings-flag nil)
+
+(load "my/setup-js-editing")
+(load "generated-customizations" t)
 
 ;;; init.el ends here
