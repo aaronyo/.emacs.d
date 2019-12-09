@@ -50,6 +50,9 @@
   (context-coloring-mode +1)
   (my/use-dominating-eslint)
   (my/use-dominating-prettier)
+  ;; Context coloring
+  ;; A string color that is neutral when context coloring
+  (set-face-foreground 'font-lock-string-face "brightblack")
   )
 
 (defun my/setup-tide-mode ()
@@ -84,10 +87,6 @@
 (add-hook 'typescript-mode-hook #'my/setup-tide-mode)
 
 (setq typescript-indent-level 2)
-
-;; Context coloring
-;; A string color that is neutral when context coloring
-(set-face-foreground 'font-lock-string-face "color-246")
 
 (setq
  ;; Leave the error highlighting to ESLint
