@@ -183,6 +183,15 @@ your recently and most frequently used commands.")
   :init
   (add-hook 'fci-mode-hook #'my/update-window-divider))
 
+(use-package flycheck
+  :config
+  (set-face-foreground 'vertical-border "black")
+  (set-face-foreground 'flycheck-error "#ff4444")
+  (set-face-foreground 'flycheck-warning "#ffdd44")
+  (set-face-foreground 'flycheck-info "#44ff44")
+  (set-face-foreground 'flycheck-warning-overlay "#ffdd44")
+  )
+
 (use-package zenburn-theme
   :custom
   (fci-rule-color "#352028")
@@ -199,11 +208,6 @@ your recently and most frequently used commands.")
   (custom-theme-set-faces
    'zenburn
    `(highlight ((t (:background , "#444444")))))
-  (set-face-foreground 'vertical-border "black")
-  (set-face-foreground 'flycheck-error "#ff4444")
-  (set-face-foreground 'flycheck-warning "#ffdd44")
-  (set-face-foreground 'flycheck-info "#44ff44")
-  (set-face-foreground 'flycheck-warning-overlay "#ffdd44")
 )
 
 
@@ -213,7 +217,6 @@ your recently and most frequently used commands.")
 )
 
 (use-package rainbow-delimiters)
-(use-package flycheck)
 
 (defun my/setup-emacs-lisp-mode ()
   "Seteup 'emacs-lisp-mode'."
