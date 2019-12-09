@@ -58,7 +58,7 @@
   )
 
 (require 'use-package-ensure)
-(setq use-package-always-ensure t)
+(custom-set-default 'use-package-always-ensure t)
 
 ;; ido and flx-ido
 (use-package ido
@@ -66,14 +66,15 @@
   :config
   (ido-mode +1)
   (ido-everywhere +1)
-  (flx-ido-mode +1)
   ;;disable ido faces to see flx highlights.
   (custom-set-default 'ido-use-faces nil)
   (custom-set-variables
    '(ido-use-filename-at-point 'guess)
-   '(ido-file-extensions-order '(".ts" ".js")
-                               ))
-  )
+   '(ido-file-extensions-order '(".ts" ".js"))))
+
+(use-package flx-ido
+  :config
+  (flx-ido-mode +1))
 
 (use-package ido-completing-read+
   :config
@@ -113,10 +114,13 @@
 
 ;; Smex - Meta-x using ido
 ;; Loading is delayed until first use
-(autoload 'smex "smex"
+(use-package smex
+  :init
+  (autoload 'smex "smex"
     "Smex is a M-x enhancement for Emacs, it provides a convenient interface to
 your recently and most frequently used commands.")
-(global-set-key (kbd "M-x") 'smex)
+  :bind
+  (("M-x" . 'smex)))
 
 ;; quiet, please! No dinging!
 ;; http://stuff-things.net/2015/10/05/emacs-visible-bell-work-around-on-os-x-el-capitan/
@@ -210,7 +214,9 @@ your recently and most frequently used commands.")
     (set-display-table-slot display-table 'vertical-border (make-glyph-code ?│))
     (set-window-display-table (selected-window) display-table)))
 
-(add-hook 'fci-mode-hook #'my/update-window-divider)
+(use-package fill-column-indicator
+  :init
+  (add-hook 'fci-mode-hook #'my/update-window-divider))
 
 (use-package zenburn-theme
   :custom
@@ -276,9 +282,10 @@ your recently and most frequently used commands.")
  '(global-company-mode t)
  '(ido-file-extensions-order (quote (".ts" ".js")))
  '(ido-use-filename-at-point (quote guess))
+ '(ido-vertical-define-keys (quote C-n-C-p-up-down-left-right))
  '(package-selected-packages
    (quote
-    (prettier-js tide company flycheck-ghcmod haskell-mode smex rjsx-mode projectile neotree multiple-cursors markdown-mode json-mode ido-grid-mode git-gutter flx-ido fill-column-indicator context-coloring)))
+    (flycheck rainbow-delimiters magit zenburn-theme fill-column-indicator company elisp-slime-nav neotree multiple-cursors projectile smex git-gutter ido-vertical-mode amx ido-completing-read+ flx-ido use-package)))
  '(standard-indent 2))
 
  (provide 'init)
