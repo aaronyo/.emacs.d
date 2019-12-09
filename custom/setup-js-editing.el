@@ -8,7 +8,6 @@
 
 (setq-default indent-tabs-mode nil)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-(add-to-list 'auto-mode-alist '("\\.jsx\\'" . rjsx-mode))
 (add-to-list 'auto-mode-alist '("\\.json\\'" . json-mode))
 
 (with-eval-after-load 'flycheck
@@ -77,7 +76,6 @@
 
 (add-hook 'js2-mode-hook #'my/setup-js2-mode)
 (add-hook 'typescript-mode-hook #'my/setup-tide-mode)
-(add-hook 'rjsx-mode-hook #'my/setup-js2-mode)
 
 (setq typescript-indent-level 2)
 
