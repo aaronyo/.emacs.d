@@ -146,7 +146,19 @@ your recently and most frequently used commands.")
   (company-tooltip-align-annotations 't)
   (global-company-mode t)
 
+  :config
+  (let ((item-bg "#333333")
+        (item-selected-bg "#665a44"))
+    (set-face-background 'company-tooltip item-bg)
+    (set-face-background 'company-tooltip-selection item-selected-bg)
+    (set-face-background 'company-tooltip-annotation item-bg)
+    (set-face-background 'company-tooltip-annotation-selection item-selected-bg)
+    (set-face-background 'company-scrollbar-bg "#dcdccc")
+    (set-face-background 'company-scrollbar-fg "#878777")
+    )
+
   :init
+
   ;; begin: fix fxi alignment conflict
   ;; https://github.com/company-mode/company-mode/issues/180
   (defvar-local company-fci-mode-on-p nil)
@@ -166,11 +178,12 @@ your recently and most frequently used commands.")
   )
 
 (defun my/init-window-divider ()
-  (set-display-table-slot standard-display-table 'vertical-border (make-glyph-code ?│)))
+  (set-display-table-slot standard-display-table 'vertical-border (make-glyph-code ?▐)))
+(my/init-window-divider)
 
 (defun my/update-window-divider ()
   (let ((display-table (or buffer-display-table standard-display-table)))
-    (set-display-table-slot display-table 'vertical-border (make-glyph-code ?│))
+    (set-display-table-slot display-table 'vertical-border (make-glyph-code ?▐))
     (set-window-display-table (selected-window) display-table)))
 
 (use-package fill-column-indicator
@@ -182,8 +195,9 @@ your recently and most frequently used commands.")
 
 (use-package flycheck
   :config
-  (set-face-foreground 'vertical-border "black")
-  (set-face-foreground 'flycheck-error "#ff4444")
+  (set-face-foreground 'vertical-border "#000000")
+  (set-face-background 'vertical-border "#111111")
+  (set-face-foreground 'flycheck-error "#ff3333")
   (set-face-foreground 'flycheck-warning "#ffdd44")
   (set-face-foreground 'flycheck-info "#44ff44")
   (set-face-foreground 'flycheck-warning-overlay "#ffdd44")
@@ -191,13 +205,11 @@ your recently and most frequently used commands.")
 
 (use-package zenburn-theme
   :custom
-  (fci-rule-color "#352028")
+  (fci-rule-color "#352035")
   :init
-  (my/init-window-divider)
   (setq zenburn-override-colors-alist
-        '(("zenburn-bg"    . "#111111")
+        '(("zenburn-bg"    . "#181818")
           ("zenburn-bg-1"  . "#444444")
-          ("zenburn-bg+1"  . "#222222")
           ("zenburn-bg-05" . "#111111")
           ))
   :config
