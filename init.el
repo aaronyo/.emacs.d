@@ -220,6 +220,8 @@ your recently and most frequently used commands.")
 
 
 (use-package magit
+  :custom
+   (magit-log-margin '(t "%Y-%m-%d %I:%M %p" magit-log-margin-width t 18))
   :bind
   (("C-x g" . 'magit-status))
 )
