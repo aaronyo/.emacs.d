@@ -146,6 +146,24 @@ your recently and most frequently used commands.")
   (company-tooltip-align-annotations 't)
   (global-company-mode t)
 
+  :init
+  ;; begin: fix fxi alignment conflict
+  ;; https://github.com/company-mode/company-mode/issues/180
+  (defvar company-fci-mode-on-p nil)
+
+  (defun company-turn-off-fci (&rest ignore)
+    (when (boundp 'fci-mode)
+      (setq-locall company-fci-mode-on-p fci-mode)
+      (when fci-mode (fci-mode -1))))
+
+  (defun company-maybe-turn-on-fci (&rest ignore)
+    (when company-fci-mode-on-p (fci-mode 1)))
+
+  (add-hook 'company-completion-started-hook 'company-turn-off-fci)
+  (add-hook 'company-completion-finished-hook 'company-maybe-turn-on-fci)
+  (add-hook 'company-completion-cancelled-hook 'company-maybe-turn-on-fci)
+  ;; end: fix fxi alignment conflict
+
   :config
   (let ((item-bg "#333333")
         (item-selected-bg "#665a44"))
@@ -156,25 +174,6 @@ your recently and most frequently used commands.")
     (set-face-background 'company-scrollbar-bg "#dcdccc")
     (set-face-background 'company-scrollbar-fg "#878777")
     )
-
-  :init
-
-  ;; begin: fix fxi alignment conflict
-  ;; https://github.com/company-mode/company-mode/issues/180
-  (defvar-local company-fci-mode-on-p nil)
-
-  (defun company-turn-off-fci (&rest ignore)
-    (when (boundp 'fci-mode)
-      (setq company-fci-mode-on-p fci-mode)
-      (when fci-mode (fci-mode -1))))
-
-  (defun company-maybe-turn-on-fci (&rest ignore)
-    (when company-fci-mode-on-p (fci-mode 1)))
-
-  (add-hook 'company-completion-started-hook 'company-turn-off-fci)
-  (add-hook 'company-completion-finished-hook 'company-maybe-turn-on-fci)
-  (add-hook 'company-completion-cancelled-hook 'company-maybe-turn-on-fci)
-  ;; end: fix fxi alignment conflict
   )
 
 (defun my/init-window-divider ()
