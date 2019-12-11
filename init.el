@@ -255,6 +255,7 @@ your recently and most frequently used commands.")
    '(:eval (my/mode-line-buffer-id (my/flycheck-buffer-status)))))
 
 (add-hook 'prog-mode-hook 'fci-mode)
+(add-hook 'prog-mode-hook 'flycheck-mode)
 (add-hook 'emacs-lisp-mode-hook #'my/setup-emacs-lisp-mode)
 
 (custom-set-default 'checkdoc-force-docstrings-flag nil)
