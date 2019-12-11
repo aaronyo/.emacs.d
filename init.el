@@ -239,8 +239,8 @@ your recently and most frequently used commands.")
   (rainbow-delimiters-mode +1)
   (flycheck-mode +1))
 
-(defun my/mode-line-buffer-id(fly-status)
-  (let ((label "%12b"))
+(defun my/mode-line-buffer-id (fly-status)
+  (let ((label "%b"))
     (cond
      ((eq fly-status 'error)
       (propertize label 'face 'flycheck-error))
