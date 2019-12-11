@@ -101,9 +101,10 @@ your recently and most frequently used commands.")
 
 (use-package multiple-cursors
   :bind
-  (("^[ >" . 'mc/mark-next-like-this)
-   ("^[ <" . 'mc/mark-previous-like-this)
-   ("C-c ^[ <" . 'mc/mark-all-like-this))
+  (
+   ("^[ [>" . 'mc/mark-next-like-this)
+   ("^[ [<" . 'mc/mark-previous-like-this)
+   ("C-c ^[ [<" . 'mc/mark-all-like-this))
   )
 
 ;; Commenting regions
