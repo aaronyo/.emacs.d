@@ -197,7 +197,6 @@ your recently and most frequently used commands.")
   (set-face-foreground 'flycheck-error "#ff3333")
   (set-face-foreground 'flycheck-warning "#ffdd44")
   (set-face-foreground 'flycheck-info "#44ff44")
-  (set-face-foreground 'flycheck-warning-overlay "#ffdd44")
   )
 
 (use-package zenburn-theme
