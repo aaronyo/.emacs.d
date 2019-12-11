@@ -18,6 +18,11 @@
 (setq auto-save-file-name-transforms
                 `((".*" ,temporary-file-directory t)))
 
+(custom-set-default 'inhibit-startup-screen t)
+
+;(custom-set-variables
+; '(initial-frame-alist (quote ((fullscreen . maximized)))))
+
 ;; ido
 (use-package ido
   :hook 'after-init-hook
@@ -53,12 +58,14 @@
 ;; Auto Save setup
 (custom-set-default 'backup-directory-alist
                     `((".*" . ,temporary-file-directory)))
-(custom-set-default 'auto-save-file-name-transforms
+(custom-set-default 'auto-save-file-name-transforms1
                     `((".*" ,temporary-file-directory t)))
 
 (use-package git-gutter
   :config
   (global-git-gutter-mode +1))
+
+(use-package git-gutter-fringe)
 
 ;; Show column numbers
 (column-number-mode 1)
@@ -132,7 +139,7 @@ your recently and most frequently used commands.")
 
 (use-package elisp-slime-nav
   :init
-  (add-hook 'emacs-lisp-mode-hook 'elisp-slime-nav-mode))
+  (add-hook 'emacs-lisp-mode 'elisp-slime-nav-mode))
 
 (use-package company
   ;; align annotation to the right hand side
@@ -174,29 +181,16 @@ your recently and most frequently used commands.")
     )
   )
 
-(defun my/init-window-divider ()
-  (set-display-table-slot standard-display-table 'vertical-border (make-glyph-code ?▐)))
-(my/init-window-divider)
-
-(defun my/update-window-divider ()
-  (let ((display-table (or buffer-display-table standard-display-table)))
-    (set-display-table-slot display-table 'vertical-border (make-glyph-code ?▐))
-    (set-window-display-table (selected-window) display-table)))
+(use-package company-box
+  :hook (company-mode . company-box-mode))
 
 (use-package fill-column-indicator
   :custom
   (fci-rule-character ?│)
-  (fci-rule-column 80)
-  :init
-  (add-hook 'fci-mode-hook #'my/update-window-divider))
+  (fci-rule-column 80))
 
 (use-package flycheck
   :config
-  (set-face-foreground 'vertical-border "#000000")
-  (set-face-background 'vertical-border "#111111")
-  (set-face-foreground 'flycheck-error "#ff3333")
-  (set-face-foreground 'flycheck-warning "#ffdd44")
-  (set-face-foreground 'flycheck-info "#44ff44")
   )
 
 (use-package zenburn-theme
@@ -213,8 +207,39 @@ your recently and most frequently used commands.")
   (custom-theme-set-faces
    'zenburn
    `(highlight ((t (:background , "#444444")))))
+  (set-face-foreground 'vertical-border "#181818")
+  (add-to-list 'default-frame-alist '(right-fringe . 0))
+  (custom-set-default 'vertical-scroll-bar nil)
+  (set-face-foreground 'flycheck-error "#ff3333")
+  (set-face-underline 'flycheck-error '(:color foreground-color :style wave))
+  (set-face-foreground 'flycheck-warning "#ffdd44")
+  (set-face-underline 'flycheck-warning '(:color foreground-color :style wave))
+  (set-face-foreground 'flycheck-info "#44ff44")
+  (set-face-underline 'flycheck-info '(:color foreground-color :style wave))
+  (set-face-background 'fringe "#111111")
 )
 
+(use-package indicators)
+;; (ind-create-indicator 'window-start
+;;                       :managed t
+;;                       :relative t
+;;                       :fringe 'left-fringe
+;;                       :face 'font-lock-warning-face)
+;; (ind-create-indicator 'window-end
+;;                       :managed t
+;;                       :relative t
+;;                       :fringe 'left-fringe
+;;                       :face 'flycheck-error
+;;                       :priority 0)
+
+
+
+;; Doesn't work...
+
+;; (defun remove-fringe ()
+;;  (set-window-fringes (get-buffer-window) 0 0 nil))
+;;
+;; (add-hook 'neotree-mode-hook #'remove-fringe)
 
 (use-package magit
   :custom
