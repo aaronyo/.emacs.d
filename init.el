@@ -190,22 +190,23 @@ your recently and most frequently used commands.")
   :init
   (add-hook 'fci-mode-hook #'my/update-window-divider))
 
-;; Experiment
-;; (defun my/color-mode-line-on-error ()
-;;   (defvar flycheck-curent-errors)
-;;   (if (< 0 (seq-length (mapcar 'flycheck-error-level flycheck-current-errors)))
-;;     (set-face-background 'mode-line "#990000")
-;;     (set-face-background 'mode-line "#181818")
-;;     ))
-
 (use-package flycheck
+  :custom
+  (flycheck-check-syntax-automatically '(save mode-enabled))
   :config
   (set-face-foreground 'vertical-border "#000000")
   (set-face-background 'vertical-border "#111111")
-  (set-face-foreground 'flycheck-error "#ff3333")
+  (set-face-foreground 'flycheck-error "#ff2222")
   (set-face-foreground 'flycheck-warning "#ffdd44")
   (set-face-foreground 'flycheck-info "#44ff44")
-;  (add-hook 'flycheck-after-syntax-check-hook #'my/color-mode-line-on-error)
+  (defun my/flycheck-buffer-status ()
+    (when (bound-and-true-p flycheck-mode)
+      (let ((error-levels (mapcar 'flycheck-error-level flycheck-current-errors)))
+        (cond
+         ((seq-contains error-levels 'error) 'error)
+         ((seq-contains error-levels 'warning) 'warning)
+         ((seq-contains error-levels 'info) 'info)
+         (t 'ok)))))
   )
 
 (use-package zenburn-theme
@@ -237,6 +238,21 @@ your recently and most frequently used commands.")
   "Seteup 'emacs-lisp-mode'."
   (rainbow-delimiters-mode +1)
   (flycheck-mode +1))
+
+(defun my/mode-line-buffer-id(fly-status)
+  (let ((label "%12b"))
+    (cond
+     ((eq fly-status 'error)
+      (propertize label 'face 'flycheck-error))
+     ((eq fly-status 'warning)
+      (propertize label 'face 'flycheck-warning))
+     ((eq fly-status 'info)
+      (propertize label 'face 'flycheck-info))
+     (t (propertize label 'face 'mode-line-buffer-id)))))
+
+(custom-set-variables
+ '(mode-line-buffer-identification
+   '(:eval (my/mode-line-buffer-id (my/flycheck-buffer-status)))))
 
 (add-hook 'prog-mode-hook 'fci-mode)
 (add-hook 'emacs-lisp-mode-hook #'my/setup-emacs-lisp-mode)
