@@ -115,8 +115,6 @@ your recently and most frequently used commands.")
   :bind
   (("<f8>" . 'neotree-toggle)
    ("<f9>" . 'neotree-find))
-  :config
-  (neotree-toggle)
   )
 
 ;; osx clipboard integration
