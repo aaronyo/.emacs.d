@@ -216,7 +216,7 @@ your recently and most frequently used commands.")
   :init
   (setq zenburn-override-colors-alist
         '(("zenburn-bg"    . "#181818")
-          ("zenburn-bg-1"  . "#444444")
+          ("zenburn-bg-1"  . "#3c3c3c")
           ("zenburn-bg-05" . "#111111")
           ))
   :config
