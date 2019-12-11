@@ -190,6 +190,14 @@ your recently and most frequently used commands.")
   :init
   (add-hook 'fci-mode-hook #'my/update-window-divider))
 
+;; Experiment
+;; (defun my/color-mode-line-on-error ()
+;;   (defvar flycheck-curent-errors)
+;;   (if (< 0 (seq-length (mapcar 'flycheck-error-level flycheck-current-errors)))
+;;     (set-face-background 'mode-line "#990000")
+;;     (set-face-background 'mode-line "#181818")
+;;     ))
+
 (use-package flycheck
   :config
   (set-face-foreground 'vertical-border "#000000")
@@ -197,6 +205,7 @@ your recently and most frequently used commands.")
   (set-face-foreground 'flycheck-error "#ff3333")
   (set-face-foreground 'flycheck-warning "#ffdd44")
   (set-face-foreground 'flycheck-info "#44ff44")
+;  (add-hook 'flycheck-after-syntax-check-hook #'my/color-mode-line-on-error)
   )
 
 (use-package zenburn-theme
