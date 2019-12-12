@@ -92,8 +92,27 @@
                     `((".*" ,temporary-file-directory t)))
 
 (use-package git-gutter
+  :after zenburn-theme
   :config
-  (global-git-gutter-mode +1))
+  (global-git-gutter-mode +1)
+  :after zenburn-theme
+  :config
+  (global-git-gutter-mode +1)
+  (custom-set-variables
+   '(git-gutter:modified-sign "●") ;; two space
+   '(git-gutter:added-sign "●")    ;; multiple character is OK
+   '(git-gutter:deleted-sign "▂"))
+  (set-face-inverse-video 'git-gutter:added nil)
+  (set-face-inverse-video 'git-gutter:deleted nil)
+  (set-face-inverse-video 'git-gutter:modified nil)
+  (set-face-background 'git-gutter:added window-background)
+  (set-face-background 'git-gutter:deleted window-background)
+  (set-face-background 'git-gutter:modified window-background)
+  (set-face-foreground 'git-gutter:added "#5f7f5f")
+  (set-face-foreground 'git-gutter:deleted "#8f5f5f")
+  (set-face-foreground 'git-gutter:modified "#5f5f7f")
+  )
+
 
 ;; Show column numbers
 (column-number-mode 1)
@@ -219,6 +238,7 @@
   (add-hook 'fci-mode-hook #'my/update-window-divider))
 
 (use-package flycheck
+  :after zenburn-theme
   :custom
   (flycheck-check-syntax-automatically '(save mode-enabled))
   :config
@@ -242,7 +262,7 @@
   (fci-rule-color "#352035")
   :init
   (setq zenburn-override-colors-alist
-        '(("zenburn-bg"    . "#181818")
+        '(("zenburn-bg"    . window-background)
           ("zenburn-bg-1"  . "#3c3c3c")
           ("zenburn-bg-05" . "#111111")
           ))
