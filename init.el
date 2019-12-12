@@ -20,36 +20,70 @@
                 `((".*" ,temporary-file-directory t)))
 
 ;; ido
-(use-package ido
-  :hook 'after-init-hook
-  :commands ido-everywhere
-  :config
-  (ido-mode +1)
-  (ido-everywhere +1)
-  ;;disable ido faces to see flx highlights.
-  (custom-set-default 'ido-use-faces nil)
-  (custom-set-variables
-   '(ido-use-filename-at-point 'guess)
-   '(ido-file-extensions-order '(".ts" ".js"))))
+;; (use-package ido
+;;   :hook 'after-init-hook
+;;   :commands ido-everywhere
+;;   :config
+;;   (ido-mode +1)
+;;   (ido-everywhere +1)
+;;   ;;disable ido faces to see flx highlights.
+;;   (custom-set-default 'ido-use-faces nil)
+;;   (custom-set-variables
+;;    '(ido-use-filename-at-point 'guess)
+;;    '(ido-file-extensions-order '(".ts" ".js"))))
 
-(use-package flx-ido
-  :config
-  (flx-ido-mode +1))
+;; (use-package flx-ido
+;;   :config
+;;   (flx-ido-mode +1))
 
-(use-package ido-completing-read+
+;; (use-package ido-completing-read+
+;;   :config
+;;   (ido-ubiquitous-mode +1))
+
+;; (use-package ido-vertical-mode
+;;   :config
+;;   (ido-vertical-mode +1)
+;;   (custom-set-variables
+;;    '(ido-vertical-define-keys 'C-n-C-p-up-down-left-right)
+;;   ))
+
+(defvar-local window-background "#181818")
+
+(use-package counsel
+  :after ivy
+  :config (counsel-mode))
+
+(use-package ivy
+  :defer 0.1
+  :diminish
+  :bind (("C-c C-r" . ivy-resume)
+         ("C-x b" . ivy-switch-buffer-other-window))
+  :custom
+  (ivy-count-format "(%d/%d) ")
+  (ivy-use-virtual-buffers t)
+  :config (ivy-mode))
+
+(require 'ivy)
+(use-package ivy-rich
+  :after ivy
+  :defer .1
+  :custom
+  (ivy-virtual-abbreviate 'full
+                          ivy-rich-switch-buffer-align-virtual-buffer t
+                          ivy-rich-path-style 'abbrev)
   :config
-  (ido-ubiquitous-mode +1))
+  (eval-after-load 'ivy
+    (ivy-set-display-transformer 'ivy-switch-buffer
+                                 'ivy-rich-switch-buffer-transformer)))
+
+(use-package swiper
+  :after ivy
+  :bind (("C-s" . swiper)
+         ("C-r" . swiper)))
 
 (use-package amx
-  :config
-  (amx-mode +1))
-
-(use-package ido-vertical-mode
-  :config
-  (ido-vertical-mode +1)
-  (custom-set-variables
-   '(ido-vertical-define-keys 'C-n-C-p-up-down-left-right)
-  ))
+  :after ivy
+  :config (amx-mode +1))
 
 ;; Auto Save setup
 (custom-set-default 'backup-directory-alist
@@ -72,16 +106,6 @@
 ;; Kill trailing white space
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-;; Smex - Meta-x using ido
-;; Loading is delayed until first use
-(use-package smex
-  :init
-  (autoload 'smex "smex"
-    "Smex is a M-x enhancement for Emacs, it provides a convenient interface to
-your recently and most frequently used commands.")
-  :bind
-  (("M-x" . 'smex)))
-
 ;; quiet, please! No dinging!
 ;; http://stuff-things.net/2015/10/05/emacs-visible-bell-work-around-on-os-x-el-capitan/
 (setq visible-bell nil)
@@ -92,10 +116,12 @@ your recently and most frequently used commands.")
 ;; Projectile
 ;; (setq projectile-enable-caching t)
 (use-package projectile
+  :after ivy
+  :custom
+  (projectile-completion-system 'ivy)
   :config
-  (projectile-mode +1)
-  :bind
-  (("C-x t" . 'projectile-find-file)))
+  (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+  (projectile-mode +1))
 
 ;; Use shift-<arrow> to navigate windows
 (windmove-default-keybindings)
