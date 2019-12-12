@@ -8,6 +8,7 @@
 (add-to-list 'load-path "~/.emacs.d/lisp")
 (custom-set-default 'custom-file "~/.emacs.d/lisp/generated-customizations.el")
 
+(load "my/key-mappings")
 (load "3p/init-use-package")
 (require 'use-package-ensure)
 (custom-set-default 'use-package-always-ensure t)

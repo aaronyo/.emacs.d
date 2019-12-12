@@ -1,0 +1,65 @@
+;;; key-mappings --- Key mappings to support Iterm2 on mac
+;;
+;;; Commentary:
+;; https://www.emacswiki.org/emacs/iTerm2
+;;
+;;; Code:
+(defun my/map-iterm2-character-sequences ()
+  (let ((map input-decode-map))
+    (define-key map "\e[1;Pa" (kbd "s-a"))
+    (define-key map "\e[1;Pb" (kbd "s-b"))
+    ;; Preserve os-x cgut
+    ;;    (define-key map "\e[1;Pc" (kbd "s-c"))
+    (define-key map "\e[1;Pd" (kbd "s-d"))
+    (define-key map "\e[1;Pe" (kbd "s-e"))
+    (define-key map "\e[1;Pf" (kbd "s-f"))
+    (define-key map "\e[1;Pg" (kbd "s-g"))
+    (define-key map "\e[1;Ph" (kbd "s-h"))
+    (define-key map "\e[1;Pi" (kbd "s-i"))
+    (define-key map "\e[1;Pj" (kbd "s-j"))
+    (define-key map "\e[1;Pk" (kbd "s-k"))
+    (define-key map "\e[1;Pl" (kbd "s-l"))
+    (define-key map "\e[1;Pm" (kbd "s-m"))
+    (define-key map "\e[1;Pn" (kbd "s-n"))
+    (define-key map "\e[1;Po" (kbd "s-o"))
+    (define-key map "\e[1;Pp" (kbd "s-p"))
+    (define-key map "\e[1;Pq" (kbd "s-q"))
+    (define-key map "\e[1;Pr" (kbd "s-r"))
+    (define-key map "\e[1;Ps" (kbd "s-s"))
+    (define-key map "\e[1;Pt" (kbd "s-t"))
+    (define-key map "\e[1;Pu" (kbd "s-u"))
+    ;; Preserve os-x paste
+    ;;    (define-key map "\e[1;Pv" (kbd "s-v"))
+    (define-key map "\e[1;Pw" (kbd "s-w"))
+    (define-key map "\e[1;Px" (kbd "s-x"))
+    (define-key map "\e[1;Py" (kbd "s-y"))
+    (define-key map "\e[1;Pz" (kbd "s-z"))
+    (define-key map "\e[1;P0" (kbd "s-0"))
+    (define-key map "\e[1;P1" (kbd "s-1"))
+    (define-key map "\e[1;P2" (kbd "s-2"))
+    (define-key map "\e[1;P3" (kbd "s-3"))
+    (define-key map "\e[1;P4" (kbd "s-4"))
+    (define-key map "\e[1;P5" (kbd "s-5"))
+    (define-key map "\e[1;P6" (kbd "s-6"))
+    (define-key map "\e[1;P7" (kbd "s-7"))
+    (define-key map "\e[1;P8" (kbd "s-8"))
+    (define-key map "\e[1;P9" (kbd "s-9"))
+    ;; Doesn't like thes character sequences... too long?
+    ;; (define-key map "\e[1;Pf1" (kbd "s-<f1>"))
+    ;; (define-key map "\e[1;Pf2" (kbd "s-<f2>"))
+    ;; (define-key map "\e[1;Pf3" (kbd "s-<f3>"))
+    ;; (define-key map "\e[1;Pf4" (kbd "s-<f4>"))
+    ;; (define-key map "\e[1;Pf5" (kbd "s-<f5>"))
+    ;; (define-key map "\e[1;Pf6" (kbd "s-<f6>"))
+    ;; (define-key map "\e[1;Pf7" (kbd "s-<f7>"))
+    ;; (define-key map "\e[1;Pf8" (kbd "s-<f8>"))
+    ;; (define-key map "\e[1;Pf9" (kbd "s-<f9>"))
+    ;; (define-key map "\e[1;Pf10" (kbd "s-<f10>"))
+    ;; (define-key map "\e[1;Pf11" (kbd "s-<f11>"))
+    ;; (define-key map "\e[1;Pf12" (kbd "s-<f12>"))
+    ))
+
+(add-hook 'tty-setup-hook #'my/map-iterm2-character-sequences)
+
+(provide 'key-mappings)
+;;; key-mappings.el ends here
