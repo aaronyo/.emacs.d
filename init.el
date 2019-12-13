@@ -84,7 +84,7 @@
   (set-face-background 'git-gutter:modified window-background)
   (set-face-foreground 'git-gutter:added "#3f5f3f")
   (set-face-foreground 'git-gutter:deleted "#6f2f2f")
-  (set-face-foreground 'git-gutter:modified "#3f3f5f")
+  (set-face-foreground 'git-gutter:modified "#3f3f7f")
   )
 
 
