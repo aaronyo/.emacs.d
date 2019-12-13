@@ -19,33 +19,6 @@
 (setq auto-save-file-name-transforms
                 `((".*" ,temporary-file-directory t)))
 
-;; ido
-;; (use-package ido
-;;   :hook 'after-init-hook
-;;   :commands ido-everywhere
-;;   :config
-;;   (ido-mode +1)
-;;   (ido-everywhere +1)
-;;   ;;disable ido faces to see flx highlights.
-;;   (custom-set-default 'ido-use-faces nil)
-;;   (custom-set-variables
-;;    '(ido-use-filename-at-point 'guess)
-;;    '(ido-file-extensions-order '(".ts" ".js"))))
-
-;; (use-package flx-ido
-;;   :config
-;;   (flx-ido-mode +1))
-
-;; (use-package ido-completing-read+
-;;   :config
-;;   (ido-ubiquitous-mode +1))
-
-;; (use-package ido-vertical-mode
-;;   :config
-;;   (ido-vertical-mode +1)
-;;   (custom-set-variables
-;;    '(ido-vertical-define-keys 'C-n-C-p-up-down-left-right)
-;;   ))
 
 (defvar-local window-background "#181818")
 
