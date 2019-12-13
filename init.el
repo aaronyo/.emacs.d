@@ -61,24 +61,30 @@
 
 (use-package git-gutter
   :after zenburn-theme
-  :config
-  (global-git-gutter-mode +1)
-  :after zenburn-theme
+  :bind
+  (("C-x C-g" . git-gutter)
+   ("s-g =" . git-gutter:popup-hunk)
+   ("s-g p" . git-gutter:previous-hunk)
+   ("s-g n" . git-gutter:next-hunk)
+   ("s-g s" . git-gutter:stage-hunk)
+   ("s-g r" . git-gutter:revert-hunk)
+   ("s-g SPC" . git-gutter:mark-hunk))
   :config
   (global-git-gutter-mode +1)
   (custom-set-variables
-   '(git-gutter:modified-sign "●") ;; two space
-   '(git-gutter:added-sign "●")    ;; multiple character is OK
-   '(git-gutter:deleted-sign "▂"))
+   '(git-gutter:modified-sign "▌")
+   '(git-gutter:added-sign "▌")
+   '(git-gutter:deleted-sign "▂")
+   '(git-gutter:window-width 1))
   (set-face-inverse-video 'git-gutter:added nil)
   (set-face-inverse-video 'git-gutter:deleted nil)
   (set-face-inverse-video 'git-gutter:modified nil)
   (set-face-background 'git-gutter:added window-background)
   (set-face-background 'git-gutter:deleted window-background)
   (set-face-background 'git-gutter:modified window-background)
-  (set-face-foreground 'git-gutter:added "#5f7f5f")
-  (set-face-foreground 'git-gutter:deleted "#8f5f5f")
-  (set-face-foreground 'git-gutter:modified "#5f5f7f")
+  (set-face-foreground 'git-gutter:added "#3f5f3f")
+  (set-face-foreground 'git-gutter:deleted "#6f2f2f")
+  (set-face-foreground 'git-gutter:modified "#3f3f5f")
   )
 
 
