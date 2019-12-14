@@ -217,7 +217,7 @@
   )
 
 (use-package zenburn-theme
-  :after git-gutter
+  :after (git-gutter fill-column-indicator)
   :custom
   (fci-rule-color "#352035")
   (git-gutter:modified-sign "▌")
