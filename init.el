@@ -71,22 +71,7 @@
    ("s-g SPC" . git-gutter:mark-hunk))
   :config
   (global-git-gutter-mode +1)
-  (custom-set-variables
-   '(git-gutter:modified-sign "▌")
-   '(git-gutter:added-sign "▌")
-   '(git-gutter:deleted-sign "▂")
-   '(git-gutter:window-width 1))
-  (set-face-inverse-video 'git-gutter:added nil)
-  (set-face-inverse-video 'git-gutter:deleted nil)
-  (set-face-inverse-video 'git-gutter:modified nil)
-  (set-face-background 'git-gutter:added window-background)
-  (set-face-background 'git-gutter:deleted window-background)
-  (set-face-background 'git-gutter:modified window-background)
-  (set-face-foreground 'git-gutter:added "#3f5f3f")
-  (set-face-foreground 'git-gutter:deleted "#6f2f2f")
-  (set-face-foreground 'git-gutter:modified "#3f3f7f")
   )
-
 
 ;; Show column numbers
 (column-number-mode 1)
@@ -232,8 +217,12 @@
   )
 
 (use-package zenburn-theme
+  :after git-gutter
   :custom
   (fci-rule-color "#352035")
+  (git-gutter:modified-sign "▌")
+  (git-gutter:added-sign "▌")
+  (git-gutter:deleted-sign "▂")
   :init
   (setq zenburn-override-colors-alist
         '(("zenburn-bg"    . window-background)
@@ -245,7 +234,16 @@
   (custom-theme-set-faces
    'zenburn
    `(highlight ((t (:background , "#444444")))))
-)
+  (set-face-inverse-video 'git-gutter:added nil)
+  (set-face-inverse-video 'git-gutter:deleted nil)
+  (set-face-inverse-video 'git-gutter:modified nil)
+  (set-face-background 'git-gutter:added window-background)
+  (set-face-background 'git-gutter:deleted window-background)
+  (set-face-background 'git-gutter:modified window-background)
+  (set-face-foreground 'git-gutter:added "#3f5f3f")
+  (set-face-foreground 'git-gutter:deleted "#6f2f2f")
+  (set-face-foreground 'git-gutter:modified "#3f3f7f")
+ )
 
 
 (use-package magit
