@@ -33,7 +33,7 @@
   :config (ivy-mode))
 
 (use-package counsel
-  :after ivy
+  :after (ivy)
   :config (counsel-mode))
 
 (use-package ivy-rich
@@ -45,12 +45,12 @@
 
 
 (use-package swiper
-  :after ivy
+  :after (ivy)
   :bind (("C-s" . swiper)
          ("C-r" . swiper)))
 
 (use-package amx
-  :after ivy
+  :after (ivy)
   :config (amx-mode +1))
 
 ;; Auto Save setup
@@ -94,7 +94,7 @@
 ;; Projectile
 ;; (setq projectile-enable-caching t)
 (use-package projectile
-  :after ivy
+  :after (ivy)
   :custom
   (projectile-completion-system 'ivy)
   :config
