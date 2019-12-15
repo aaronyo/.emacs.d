@@ -60,7 +60,6 @@
                     `((".*" ,temporary-file-directory t)))
 
 (use-package git-gutter
-  :after zenburn-theme
   :bind
   (("C-x C-g" . git-gutter)
    ("s-g =" . git-gutter:popup-hunk)
@@ -167,17 +166,6 @@
   (add-hook 'company-completion-finished-hook 'company-maybe-turn-on-fci)
   (add-hook 'company-completion-cancelled-hook 'company-maybe-turn-on-fci)
   ;; end: fix fxi alignment conflict
-
-  :config
-  (let ((item-bg "#333333")
-        (item-selected-bg "#665a44"))
-    (set-face-background 'company-tooltip item-bg)
-    (set-face-background 'company-tooltip-selection item-selected-bg)
-    (set-face-background 'company-tooltip-annotation item-bg)
-    (set-face-background 'company-tooltip-annotation-selection item-selected-bg)
-    (set-face-background 'company-scrollbar-bg "#dcdccc")
-    (set-face-background 'company-scrollbar-fg "#878777")
-    )
   )
 
 (defun my/init-window-divider ()
@@ -197,15 +185,9 @@
   (add-hook 'fci-mode-hook #'my/update-window-divider))
 
 (use-package flycheck
-  :after zenburn-theme
   :custom
   (flycheck-check-syntax-automatically '(save mode-enabled))
   :config
-  (set-face-foreground 'vertical-border "#000000")
-  (set-face-background 'vertical-border "#111111")
-  (set-face-foreground 'flycheck-error "#ff2222")
-  (set-face-foreground 'flycheck-warning "#ffdd44")
-  (set-face-foreground 'flycheck-info "#44ff44")
   (defun my/flycheck-buffer-status ()
     (when (bound-and-true-p flycheck-mode)
       (let ((error-levels (mapcar 'flycheck-error-level flycheck-current-errors)))
@@ -217,7 +199,7 @@
   )
 
 (use-package zenburn-theme
-  :after (git-gutter fill-column-indicator)
+  :after (git-gutter fill-column-indicator flycheck company)
   :custom
   (fci-rule-color "#352035")
   (git-gutter:modified-sign "▌")
@@ -243,6 +225,19 @@
   (set-face-foreground 'git-gutter:added "#3f5f3f")
   (set-face-foreground 'git-gutter:deleted "#6f2f2f")
   (set-face-foreground 'git-gutter:modified "#3f3f7f")
+  (set-face-foreground 'vertical-border "#000000")
+  (set-face-background 'vertical-border "#111111")
+  (set-face-foreground 'flycheck-error "#ff2222")
+  (set-face-foreground 'flycheck-warning "#ffdd44")
+  (set-face-foreground 'flycheck-info "#44ff44")
+  (let ((item-bg "#333333")
+        (item-selected-bg "#665a44"))
+    (set-face-background 'company-tooltip item-bg)
+    (set-face-background 'company-tooltip-selection item-selected-bg)
+    (set-face-background 'company-tooltip-annotation item-bg)
+    (set-face-background 'company-tooltip-annotation-selection item-selected-bg)
+    (set-face-background 'company-scrollbar-bg "#dcdccc")
+    (set-face-background 'company-scrollbar-fg "#878777"))
  )
 
 
