@@ -74,15 +74,19 @@
   )
 
 ;; eslint --fix is too slow to run with every save
-(defun my/eslint-fix-file ()
-  (message nil "eslint --fixing the file" (buffer-file-name))
-  (shell-command (concat flycheck-javascript-eslint-executable " --fix " (buffer-file-name))))
+(defun my/js-fix-file ()
+  (message "Running eslint --fix on `%s'..." (buffer-file-name))
+  (shell-command (concat flycheck-javascript-eslint-executable " --fix " (buffer-file-name)))
+  (message "Running prettier on `%s'..." (buffer-file-name))
+  (shell-command (concat prettier-js-command " --write " (buffer-file-name))))
 
-(defun eslint-fix ()
+(defun js-fix ()
   "Rewrite the current buffer's file using eslint-fix and then revert."
   (interactive)
-  (my/eslint-fix-file)
+  (my/js-fix-file)
   (revert-buffer t t))
+
+(global-set-key (kbd "s-u f") 'js-fix)
 
 (add-hook 'js2-mode-hook #'my/setup-js2-mode)
 (add-hook 'typescript-mode-hook #'my/setup-tide-mode)
