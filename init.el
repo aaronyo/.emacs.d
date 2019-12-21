@@ -278,6 +278,8 @@
 
 (custom-set-default 'checkdoc-force-docstrings-flag nil)
 
+(global-set-key (kbd "C-x k") 'kill-this-buffer)
+
 (load "my/performance")
 (load "my/setup-js-editing")
 (load "generated-customizations" t)
