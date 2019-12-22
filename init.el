@@ -295,7 +295,6 @@
 (global-set-key (kbd "C-x k") 'kill-this-buffer)
 
 (use-package diminish
-;  :after (powerline)
   :config
   (diminish 'eldoc-mode)
   (diminish 'auto-revert-mode " ↻"))
