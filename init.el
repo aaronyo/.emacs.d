@@ -35,6 +35,7 @@
   :config (ivy-mode))
 
 (use-package counsel
+  :diminish
   :after (ivy)
   :config (counsel-mode))
 
@@ -52,6 +53,7 @@
          ("C-r" . swiper)))
 
 (use-package amx
+  :diminish
   :after (ivy)
   :config (amx-mode +1))
 
@@ -62,6 +64,7 @@
                     `((".*" ,temporary-file-directory t)))
 
 (use-package git-gutter
+  :diminish " 𝙂"
   :bind
   (("C-x C-g" . git-gutter)
    ("s-g =" . git-gutter:popup-hunk)
@@ -95,6 +98,7 @@
 ;; Projectile
 ;; (setq projectile-enable-caching t)
 (use-package projectile
+  :diminish " 𝙋"
   :after (ivy)
   :custom
   (projectile-completion-system 'ivy)
@@ -138,10 +142,12 @@
 (setq interprogram-paste-function 'copy-from-osx)
 
 (use-package elisp-slime-nav
+  :diminish
   :init
   (add-hook 'emacs-lisp-mode-hook 'elisp-slime-nav-mode))
 
 (use-package company
+  :diminish
   ;; align annotation to the right hand side
   :custom
   (company-begin-commands '(self-insert-command))
@@ -180,6 +186,7 @@
     (set-window-display-table (selected-window) display-table)))
 
 (use-package fill-column-indicator
+  :diminish fci-mode
   :custom
   (fci-rule-character ?│)
   (fci-rule-column 80)
@@ -187,6 +194,7 @@
   (add-hook 'fci-mode-hook #'my/update-window-divider))
 
 (use-package flycheck
+  :diminish " 𝙁"
   :custom
   (flycheck-check-syntax-automatically '(save mode-enabled))
   :config
@@ -280,18 +288,11 @@
 
 (global-set-key (kbd "C-x k") 'kill-this-buffer)
 
-(use-package rich-minority
-  :init
+(use-package diminish
+;  :after (powerline)
   :config
-  (rich-minority-mode +1)
-  (setq rm-whitelist
-        (format "^ \\(%s\\)$"
-                (mapconcat #'identity
-                           '("Fly.*" "Projectile.*" "PgLn")
-                           "\\|")))
-  (add-to-list 'rm-text-properties '("Projectile.*\\'" 'display " 𝗣"))
-  (add-to-list 'rm-text-properties '("Fly.*\\'" 'display " 𝗙"))
-  )
+  (diminish 'eldoc-mode)
+  (diminish 'auto-revert-mode " ↻"))
 
 (load "my/performance")
 (load "my/setup-js-editing")
