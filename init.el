@@ -280,8 +280,22 @@
 
 (global-set-key (kbd "C-x k") 'kill-this-buffer)
 
+(use-package rich-minority
+  :init
+  :config
+  (rich-minority-mode +1)
+  (setq rm-whitelist
+        (format "^ \\(%s\\)$"
+                (mapconcat #'identity
+                           '("Fly.*" "Projectile.*" "PgLn")
+                           "\\|")))
+  (add-to-list 'rm-text-properties '("Projectile.*\\'" 'display " 𝗣"))
+  (add-to-list 'rm-text-properties '("Fly.*\\'" 'display " 𝗙"))
+  )
+
 (load "my/performance")
 (load "my/setup-js-editing")
 (load "generated-customizations" t)
+
 
 ;;; init.el ends here
