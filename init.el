@@ -279,6 +279,12 @@
  '(mode-line-buffer-identification
    '(:eval (my/mode-line-buffer-id (my/flycheck-buffer-status)))))
 
+(setcdr (assq 'vc-mode mode-line-format)
+        '((:eval (replace-regexp-in-string "^ Git"
+                                           (format " %s "
+                                                   (char-to-string #xe0a0))
+                                           vc-mode))))
+
 (add-hook 'prog-mode-hook 'fci-mode)
 (add-hook 'prog-mode-hook 'flycheck-mode)
 (add-hook 'prog-mode-hook 'git-gutter-mode)
