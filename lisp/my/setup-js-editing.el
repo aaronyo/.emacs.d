@@ -45,6 +45,7 @@
   (setq-local tide-tsserver-executable (my/find-dominating "bin/tsserver")))
 
 (defun my/setup-js2-mode ()
+  (setq mode-name "JS-2")
   (flycheck-mode +1)
   (fci-mode +1)
   (prettier-js-mode +1)
