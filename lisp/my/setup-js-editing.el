@@ -6,12 +6,17 @@
 
 (setq lexical-binding t)
 (require 'flycheck)
+(require 'diminish)
 
-(use-package prettier-js)
+(use-package prettier-js
+  :diminish " prettier")
+
 (use-package js2-mode)
+
 (use-package tide)
 (use-package json-mode)
-(use-package context-coloring)
+(use-package context-coloring
+  :diminish "context")
 (use-package tide)
 
 (setq-default indent-tabs-mode nil)
