@@ -250,6 +250,9 @@
     (set-face-background 'company-scrollbar-fg "#878777"))
  )
 
+(use-package dockerfile-mode
+  :config
+  (add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode)))
 
 (use-package magit
   :custom
@@ -298,6 +301,17 @@
   :config
   (diminish 'eldoc-mode)
   (diminish 'auto-revert-mode " ↻"))
+
+
+(use-package markdown-mode
+  :ensure t
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :init
+  (setq markdown-command "multimarkdown")
+  (setq markdown-open-command "/usr/local/bin/marked"))
 
 (load "my/performance")
 (load "my/setup-js-editing")
