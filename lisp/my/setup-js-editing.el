@@ -66,7 +66,6 @@
   (my/use-dominating-tsserver)
   (tide-setup)
   (flycheck-mode +1)
-  (setq flycheck-check-syntax-automatically '(save mode-enabled))
   (eldoc-mode +1)
   (tide-hl-identifier-mode +1)
   (if (not (member 'javascript-eslint (flycheck-checker-get 'typescript-tide 'next-checkers)))

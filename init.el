@@ -199,7 +199,8 @@
 (use-package flycheck
   :diminish " 𝙁"
   :custom
-  (flycheck-check-syntax-automatically '(save mode-enabled))
+  (flycheck-idle-change-delay 2)
+  (flycheck-check-syntax-automatically '(save mode-enabled idle-change))
   :config
   (defun my/flycheck-buffer-status ()
     (when (bound-and-true-p flycheck-mode)
