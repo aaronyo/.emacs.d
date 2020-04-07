@@ -318,6 +318,7 @@
 
 (load "my/performance")
 (load "my/setup-js-editing")
+(load "my/setup-python-editing")
 (load "generated-customizations" t)
 
 
