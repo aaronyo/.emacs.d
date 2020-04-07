@@ -185,6 +185,9 @@
     (set-display-table-slot display-table 'vertical-border (make-glyph-code ?▐))
     (set-window-display-table (selected-window) display-table)))
 
+
+(define-globalized-minor-mode global-fci-mode fci-mode (lambda () (fci-mode 1)))
+
 (use-package fill-column-indicator
   :diminish fci-mode
   :custom
