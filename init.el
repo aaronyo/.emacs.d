@@ -145,8 +145,11 @@
       (process-send-string proc text)
       (process-send-eof proc))))
 
-(setq interprogram-cut-function 'paste-to-osx)
-(setq interprogram-paste-function 'copy-from-osx)
+(cond
+ ((string-equal system-type "darwin") ; Mac OS X
+  (progn
+    (setq interprogram-cut-function 'paste-to-osx)
+    (setq interprogram-paste-function 'copy-from-osx))))
 
 (use-package elisp-slime-nav
   :diminish
