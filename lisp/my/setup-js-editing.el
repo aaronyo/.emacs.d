@@ -91,6 +91,7 @@
   (my/js-fix-file)
   (revert-buffer t t))
 
+(global-unset-key (kbd "s-u"))
 (global-set-key (kbd "s-u f") 'js-fix)
 
 (add-hook 'js2-mode-hook #'my/setup-js2-mode)

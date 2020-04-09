@@ -8,6 +8,16 @@
 (add-to-list 'load-path "~/.emacs.d/lisp")
 (custom-set-default 'custom-file "~/.emacs.d/lisp/generated-customizations.el")
 
+(when (display-graphic-p)
+  (toggle-scroll-bar -1)
+  (fringe-mode -1)
+  (custom-set-faces
+   '(fringe ((t (:background "#181818")))))
+  (toggle-frame-fullscreen)
+  (set-window-margins nil 1)
+  )
+
+
 (load "my/key-mappings")
 (load "3p/init-use-package")
 (require 'use-package-ensure)
@@ -66,13 +76,7 @@
 (use-package git-gutter
   :diminish " 𝙂"
   :bind
-  (("C-x C-g" . git-gutter)
-   ("s-g =" . git-gutter:popup-hunk)
-   ("s-g p" . git-gutter:previous-hunk)
-   ("s-g n" . git-gutter:next-hunk)
-   ("s-g s" . git-gutter:stage-hunk)
-   ("s-g r" . git-gutter:revert-hunk)
-   ("s-g SPC" . git-gutter:mark-hunk))
+  (("C-x C-g" . git-gutter))
   :config
   (global-git-gutter-mode +1)
   )
@@ -123,6 +127,8 @@
 
 
 (use-package neotree
+  :config
+  (setq neo-theme 'ascii)
   :bind
   (("<f8>" . 'neotree-toggle)
    ("<f9>" . 'neotree-find))
