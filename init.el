@@ -9,6 +9,7 @@
 (custom-set-default 'custom-file "~/.emacs.d/lisp/generated-customizations.el")
 
 (when (display-graphic-p)
+  (tool-bar-mode -1)
   (toggle-scroll-bar -1)
   (fringe-mode -1)
   (custom-set-faces
