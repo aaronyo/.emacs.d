@@ -8,16 +8,6 @@
 (add-to-list 'load-path "~/.emacs.d/lisp")
 (custom-set-default 'custom-file "~/.emacs.d/lisp/generated-customizations.el")
 
-;; osx clipboard integration
-(defun copy-from-osx ()
-  (shell-command-to-string "pbpaste"))
-
-(defun paste-to-osx (text &optional push)
-  (let ((process-connection-type nil))
-    (let ((proc (start-process "pbcopy" "*Messages*" "pbcopy")))
-      (process-send-string proc text)
-      (process-send-eof proc))))
-
 (if (display-graphic-p)
     (progn
       (tool-bar-mode -1)
@@ -28,14 +18,30 @@
       (toggle-frame-fullscreen)
       (set-window-margins nil 1)
       )
-  (progn
-    (setq interprogram-cut-function 'paste-to-osx)
-    (setq interprogram-paste-function 'copy-from-osx)))
+  nil)
 
 (load "my/key-mappings")
 (load "3p/init-use-package")
 (require 'use-package-ensure)
 (custom-set-default 'use-package-always-ensure t)
+
+
+;; osx clipboard integration
+(defun copy-from-osx ()
+  (shell-command-to-string "pbpaste"))
+
+(defun paste-to-osx (text &optional push)
+  (let ((process-connection-type nil))
+    (let ((proc (start-process "pbcopy" "*Messages*" "pbcopy")))
+      (process-send-string proc text)
+      (process-send-eof proc))))
+
+(cond
+ ((string-equal system-type "darwin") ; Mac OS X
+  (progn
+    (setq interprogram-cut-function 'paste-to-osx)
+    (setq interprogram-paste-function 'copy-from-osx))))
+
 
 ;; osx clipbard support for emacs in ssh terminal
 (use-package clipetty
