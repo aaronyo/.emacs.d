@@ -8,16 +8,29 @@
 (add-to-list 'load-path "~/.emacs.d/lisp")
 (custom-set-default 'custom-file "~/.emacs.d/lisp/generated-customizations.el")
 
-(when (display-graphic-p)
-  (tool-bar-mode -1)
-  (toggle-scroll-bar -1)
-  (fringe-mode -1)
-  (custom-set-faces
-   '(fringe ((t (:background "#181818")))))
-  (toggle-frame-fullscreen)
-  (set-window-margins nil 1)
-  )
+;; osx clipboard integration
+(defun copy-from-osx ()
+  (shell-command-to-string "pbpaste"))
 
+(defun paste-to-osx (text &optional push)
+  (let ((process-connection-type nil))
+    (let ((proc (start-process "pbcopy" "*Messages*" "pbcopy")))
+      (process-send-string proc text)
+      (process-send-eof proc))))
+
+(if (display-graphic-p)
+    (progn
+      (tool-bar-mode -1)
+      (toggle-scroll-bar -1)
+      (fringe-mode -1)
+      (custom-set-faces
+       '(fringe ((t (:background "#181818")))))
+      (toggle-frame-fullscreen)
+      (set-window-margins nil 1)
+      )
+  (progn
+    (setq interprogram-cut-function 'paste-to-osx)
+    (setq interprogram-paste-function 'copy-from-osx)))
 
 (load "my/key-mappings")
 (load "3p/init-use-package")
@@ -134,22 +147,6 @@
   (("<f8>" . 'neotree-toggle)
    ("<f9>" . 'neotree-find))
   )
-
-;; osx clipboard integration
-(defun copy-from-osx ()
-  (shell-command-to-string "pbpaste"))
-
-(defun paste-to-osx (text &optional push)
-  (let ((process-connection-type nil))
-    (let ((proc (start-process "pbcopy" "*Messages*" "pbcopy")))
-      (process-send-string proc text)
-      (process-send-eof proc))))
-
-(cond
- ((string-equal system-type "darwin") ; Mac OS X
-  (progn
-    (setq interprogram-cut-function 'paste-to-osx)
-    (setq interprogram-paste-function 'copy-from-osx))))
 
 (use-package elisp-slime-nav
   :diminish
