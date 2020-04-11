@@ -37,6 +37,12 @@
 (require 'use-package-ensure)
 (custom-set-default 'use-package-always-ensure t)
 
+;; osx clipbard support for emacs in ssh terminal
+(use-package clipetty
+  :ensure t
+  :bind ("M-w" . clipetty-kill-ring-save))
+
+
 ;; Backup file setup
 (setq backup-directory-alist
       `((".*" . ,temporary-file-directory)))
