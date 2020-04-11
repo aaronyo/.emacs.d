@@ -132,7 +132,10 @@
   (
    ("^[ [>" . 'mc/mark-next-like-this)
    ("^[ [<" . 'mc/mark-previous-like-this)
-   ("C-c ^[ [<" . 'mc/mark-all-like-this))
+   ("C-c ^[ [<" . 'mc/mark-all-like-this)
+   ("C->" . 'mc/mark-next-like-this)
+   ("C-<" . 'mc/mark-previous-like-this)
+   )
   )
 
 ;; Commenting regions
