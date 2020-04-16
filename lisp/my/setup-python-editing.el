@@ -15,4 +15,10 @@
   (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
   (add-hook 'elpy-mode-hook 'flycheck-mode))
 
+(use-package blacken
+  :init
+  (setq blacken-line-length 79))
+
+(use-package py-isort)
+
 ;;; setup-python-editing ends here
