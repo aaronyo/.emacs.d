@@ -251,7 +251,8 @@
   (load-theme 'zenburn t)
   (custom-theme-set-faces
    'zenburn
-   `(highlight ((t (:background , "#444444")))))
+   `(highlight ((t (:background , "#444444"))))
+   `(highlight-indentation-face ((t (:background "#222")))))
   (set-face-inverse-video 'git-gutter:added nil)
   (set-face-inverse-video 'git-gutter:deleted nil)
   (set-face-inverse-video 'git-gutter:modified nil)
@@ -274,7 +275,7 @@
     (set-face-background 'company-tooltip-annotation-selection item-selected-bg)
     (set-face-background 'company-scrollbar-bg "#dcdccc")
     (set-face-background 'company-scrollbar-fg "#878777"))
- )
+  )
 
 (use-package dockerfile-mode
   :config
