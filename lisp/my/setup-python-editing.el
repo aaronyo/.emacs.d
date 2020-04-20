@@ -4,11 +4,16 @@
 
 ;;; Code:
 
+(use-package jedi)
+
 (use-package elpy
   :ensure t
   :init
-  (elpy-enable))
-
+  (add-hook 'elpy-mode-hook 'jedi:setup)
+  (add-hook 'python-mode-hook (lambda () (auto-complete-mode -1)))
+  (setq ac-modes (delq 'python-mode ac-modes))
+  (elpy-enable)
+  )
 
 ;; Enable Flycheck
 (when (require 'flycheck nil t)

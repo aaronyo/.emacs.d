@@ -12,3 +12,5 @@ auto-save-list/
 lisp/generated-customizations.el
 recentf
 elpy/
+.python-environments/
+ac-comphist.dat
