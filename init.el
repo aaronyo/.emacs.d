@@ -340,6 +340,14 @@
   (setq markdown-command "multimarkdown")
   (setq markdown-open-command "/usr/local/bin/marked"))
 
+(use-package web-mode
+  :config
+  (setq web-mode-markup-indent-offset 2))
+
+(add-hook 'css-mode-hook
+      (lambda ()
+        (setq css-indent-offset 2)))
+
 (load "my/performance")
 (load "my/setup-js-editing")
 (load "my/setup-python-editing")
