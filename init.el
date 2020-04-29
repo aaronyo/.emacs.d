@@ -318,6 +318,9 @@
 (add-hook 'prog-mode-hook 'fci-mode)
 (add-hook 'prog-mode-hook 'flycheck-mode)
 (add-hook 'prog-mode-hook 'git-gutter-mode)
+;; global-auto-revert-mode does not seem to be working for me...
+(add-hook 'prog-mode-hook 'auto-revert-mode)
+
 (add-hook 'emacs-lisp-mode-hook #'my/setup-emacs-lisp-mode)
 
 (custom-set-default 'checkdoc-force-docstrings-flag nil)
