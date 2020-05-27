@@ -38,8 +38,8 @@
 (defvar-local
   flycheck-javascript-eslint-executable nil)
 (defun my/use-dominating-eslint ()
-(setq-local
- flycheck-javascript-eslint-executable (my/find-dominating "bin/eslint")))
+  (setq-local
+   flycheck-javascript-eslint-executable (my/find-dominating "bin/eslint")))
 
 (defvar-local prettier-js-command nil)
 (defun my/use-dominating-prettier ()

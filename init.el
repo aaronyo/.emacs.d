@@ -223,6 +223,7 @@
   :custom
   (flycheck-idle-change-delay 2)
   (flycheck-check-syntax-automatically '(save mode-enabled idle-change))
+  (flycheck-stylelintrc ".stylelintrc.json")
   :config
   (defun my/flycheck-buffer-status ()
     (when (bound-and-true-p flycheck-mode)
@@ -347,14 +348,25 @@
   :config
   (setq web-mode-markup-indent-offset 2))
 
-(add-hook 'css-mode-hook
-      (lambda ()
-        (setq css-indent-offset 2)))
-
 (load "my/performance")
 (load "my/setup-js-editing")
 (load "my/setup-python-editing")
-(load "generated-customizations" t)
 
+
+(defvar-local stylelint-executable nil)
+(defun my/use-dominating-stylelint ()
+  (setq-local
+   flycheck-css-stylelint-executable (my/find-dominating "bin/stylelint")))
+
+(defun my/setup-css-mode ()
+  (setq css-indent-offset 2)
+  (prettier-js-mode +1)
+  (my/use-dominating-prettier)
+  (my/use-dominating-stylelint))
+
+
+(add-hook 'css-mode-hook #'my/setup-css-mode)
+
+(load "generated-customizations" t)
 
 ;;; init.el ends here
