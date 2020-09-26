@@ -252,8 +252,7 @@
   (load-theme 'zenburn t)
   (custom-theme-set-faces
    'zenburn
-   `(highlight ((t (:background , "#444444"))))
-   `(highlight-indentation-face ((t (:background "#222")))))
+   `(highlight ((t (:background , "#444444")))))
   (set-face-inverse-video 'git-gutter:added nil)
   (set-face-inverse-video 'git-gutter:deleted nil)
   (set-face-inverse-video 'git-gutter:modified nil)
@@ -268,6 +267,8 @@
   (set-face-foreground 'flycheck-error "#ff2222")
   (set-face-foreground 'flycheck-warning "#ffdd44")
   (set-face-foreground 'flycheck-info "#44ff44")
+  (set-face-background 'highlight-indentation-face "#111")
+  (set-face-background 'highlight-indentation-current-column-face "#222")
   (let ((item-bg "#333333")
         (item-selected-bg "#665a44"))
     (set-face-background 'company-tooltip item-bg)
@@ -316,11 +317,14 @@
                                                    (char-to-string #xe0a0))
                                            vc-mode))))
 
-(add-hook 'prog-mode-hook 'fci-mode)
-(add-hook 'prog-mode-hook 'flycheck-mode)
-(add-hook 'prog-mode-hook 'git-gutter-mode)
-;; global-auto-revert-mode does not seem to be working for me...
-(add-hook 'prog-mode-hook 'auto-revert-mode)
+(add-hook 'prog-mode-hook
+          (lambda()
+            (fci-mode +1)
+            (flycheck-mode +1)
+            (git-gutter-mode +1)
+            ;; global-auto-revert-mode does not seem to be working for me...
+            (auto-revert-mode +1)
+            (highlight-indentation-current-column-mode +1)))
 
 (add-hook 'emacs-lisp-mode-hook #'my/setup-emacs-lisp-mode)
 
