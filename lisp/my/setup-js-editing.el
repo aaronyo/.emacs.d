@@ -60,7 +60,6 @@
   ;; Context coloring
   ;; A string color that is neutral when context coloring
   (set-face-foreground 'font-lock-string-face "brightblack")
-  (highlight-indentation-mode +1)
   )
 
 (defun my/setup-tide-mode ()
@@ -77,7 +76,6 @@
   (my/use-dominating-eslint)
   (prettier-js-mode +1)
   (fci-mode +1)
-  (highlight-indentation-mode +1)
   )
 
 ;; eslint --fix is too slow to run with every save
