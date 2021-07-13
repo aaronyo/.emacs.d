@@ -7,6 +7,8 @@
 (setq lexical-binding t)
 (add-to-list 'load-path "~/.emacs.d/lisp")
 (custom-set-default 'custom-file "~/.emacs.d/lisp/generated-customizations.el")
+(setq create-lockfiles nil)
+(setq-default tab-width 2)
 
 (if (display-graphic-p)
     (progn
