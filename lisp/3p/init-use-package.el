@@ -1,28 +1,23 @@
-;;; init-use-package.el --- Get started with use-package in emacs
-;; source: https://github.com/CachesToCaches/getting_started_with_use_package
-;; Copyright (C) 2015 Gregory J Stein
-
-;; Author: Gregory J Stein <gregory.j.stein@gmail.com>
-;; Keywords: use-package
-;; License: none, use this however you want without citation
-;;
-
-;; Code inspired by:
-;;      http://stackoverflow.com/a/10093312/3672986
-;;      http://www.lunaryorn.com/2015/01/06/my-emacs-configuration-with-use-package.html
-;;      https://github.com/jwiegley/use-package
-
-
+;;; init-use-package.el --- Setup straight and use-package
 ;;; Commentary:
 
-;; As Sebastian Wiesner from http://www.lunaryorn.com/ points out, there is a "chicken
-;; and egg" problem with use-package, which is capable of automatically downloading and
-;; installing packages, but otherwise needs to be downloaded and installed manually.
-;; I include the following code in my Emacs initialization file so that this process
-;; is automatic.
-
-
 ;;; Code:
+;; install straight.el
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 6))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+
+(straight-use-package 'use-package)
+(setq straight-use-package-by-default t)
 
 ;; Update package-archive lists
 (require 'package)
@@ -30,15 +25,6 @@
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
-(package-initialize)
 
-;; Install 'use-package' if necessary
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
-
-;; Enable use-package
-(eval-when-compile
-  (require 'use-package))
 
 ;;; init-use-package.el ends here

@@ -24,9 +24,6 @@
 
 (load "my/key-mappings")
 (load "3p/init-use-package")
-(require 'use-package-ensure)
-(custom-set-default 'use-package-always-ensure t)
-
 
 ;; osx clipboard integration
 (defun copy-from-osx ()
@@ -47,7 +44,6 @@
 
 ;; osx clipbard support for emacs in ssh terminal
 (use-package clipetty
-  :ensure t
   :bind ("M-w" . clipetty-kill-ring-save))
 
 
@@ -346,7 +342,6 @@
 
 
 (use-package markdown-mode
-  :ensure t
   :commands (markdown-mode gfm-mode)
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
