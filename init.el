@@ -199,9 +199,9 @@
   (defun company-maybe-turn-on-fci (&rest ignore)
     (when company-fci-mode-on-p (fci-mode 1)))
 
-  (add-hook 'company-completion-started-hook 'company-turn-off-fci)
-  (add-hook 'company-completion-finished-hook 'company-maybe-turn-on-fci)
-  (add-hook 'company-completion-cancelled-hook 'company-maybe-turn-on-fci)
+  ;; (add-hook 'company-completion-started-hook 'company-turn-off-fci)
+  ;; (add-hook 'company-completion-finished-hook 'company-maybe-turn-on-fci)
+  ;; (add-hook 'company-completion-cancelled-hook 'company-maybe-turn-on-fci)
   ;; end: fix fxi alignment conflict
   )
 
@@ -326,7 +326,7 @@
 
 (add-hook 'prog-mode-hook
           (lambda()
-            (fci-mode +1)
+            ;; (fci-mode +1)
             (flycheck-mode +1)
             (git-gutter-mode +1)
             ;; global-auto-revert-mode does not seem to be working for me...

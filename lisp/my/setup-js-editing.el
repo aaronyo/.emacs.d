@@ -52,7 +52,7 @@
 (defun my/setup-js2-mode ()
   (setq mode-name "JS-2")
   (flycheck-mode +1)
-  (fci-mode +1)
+  ;(fci-mode +1)
   (prettier-js-mode +1)
   (context-coloring-mode +1)
   (my/use-dominating-eslint)
@@ -75,7 +75,7 @@
   (my/use-dominating-prettier)
   (my/use-dominating-eslint)
   (prettier-js-mode +1)
-  (fci-mode +1)
+  ;(fci-mode +1)
   )
 
 ;; eslint --fix is too slow to run with every save
