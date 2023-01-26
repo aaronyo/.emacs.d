@@ -13,6 +13,8 @@
   (add-hook 'python-mode-hook (lambda () (auto-complete-mode -1)))
   (setq ac-modes (delq 'python-mode ac-modes))
   (elpy-enable)
+  (setq elpy-rpc-virtualenv-path 'current)
+  (add-to-list 'process-coding-system-alist '("python" . (utf-8 . utf-8)))
   )
 
 ;; Enable Flycheck
