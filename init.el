@@ -359,6 +359,8 @@
   :config
   (setq web-mode-markup-indent-offset 2))
 
+(use-package restclient)
+
 (load "my/performance")
 (load "my/setup-js-editing")
 (load "my/setup-python-editing")
