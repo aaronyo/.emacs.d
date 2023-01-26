@@ -22,6 +22,7 @@
 (setq-default indent-tabs-mode nil)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.json\\'" . json-mode))
+(add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode))
 
 (with-eval-after-load 'flycheck
   (flycheck-add-mode 'javascript-eslint 'typescript-mode))
