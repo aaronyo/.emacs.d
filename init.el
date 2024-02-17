@@ -2,7 +2,6 @@
 ;;; Commentary:
 ;;
 
-
 ;;; Code:
 (setq lexical-binding t)
 (add-to-list 'load-path "~/.emacs.d/lisp")
@@ -24,6 +23,7 @@
 
 (load "my/key-mappings")
 (load "3p/init-use-package")
+(load "3p/hl-column")
 
 ;; osx clipboard integration
 (defun copy-from-osx ()
@@ -45,7 +45,6 @@
 ;; osx clipbard support for emacs in ssh terminal
 (use-package clipetty
   :bind ("M-w" . clipetty-kill-ring-save))
-
 
 ;; Backup file setup
 (setq backup-directory-alist
@@ -270,8 +269,8 @@
   (set-face-foreground 'flycheck-error "#ff2222")
   (set-face-foreground 'flycheck-warning "#ffdd44")
   (set-face-foreground 'flycheck-info "#44ff44")
-  (set-face-background 'highlight-indentation-face "#111")
-  (set-face-background 'highlight-indentation-current-column-face "#222")
+;;  (set-face-background 'highlight-indentation-face "#111")
+  (set-face-background 'hl-column "#000")
   (let ((item-bg "#333333")
         (item-selected-bg "#665a44"))
     (set-face-background 'company-tooltip item-bg)
@@ -355,7 +354,7 @@
             (git-gutter-mode +1)
             ;; global-auto-revert-mode does not seem to be working for me...
             (auto-revert-mode +1)
-            (highlight-indentation-current-column-mode +1)
+            (hl-column-mode +1)
             (copilot-mode +1)))
 
 (add-hook 'emacs-lisp-mode-hook #'my/setup-emacs-lisp-mode)
