@@ -320,21 +320,6 @@
                                                    (char-to-string #xe0a0))
                                            vc-mode))))
 
-(add-hook 'prog-mode-hook
-          (lambda()
-            ;; (fci-mode +1)
-            (flycheck-mode +1)
-            (git-gutter-mode +1)
-            ;; global-auto-revert-mode does not seem to be working for me...
-            (auto-revert-mode +1)
-            (highlight-indentation-current-column-mode +1)))
-
-(add-hook 'emacs-lisp-mode-hook #'my/setup-emacs-lisp-mode)
-
-(custom-set-default 'checkdoc-force-docstrings-flag nil)
-
-(global-set-key (kbd "C-x k") 'kill-this-buffer)
-
 (use-package diminish
   :config
   (diminish 'eldoc-mode)
@@ -355,6 +340,29 @@
   (setq web-mode-markup-indent-offset 2))
 
 (use-package restclient)
+
+(use-package copilot
+  :straight (:host github :repo "zerolfx/copilot.el" :files ("dist" "*.el"))
+  :diminish " ✈"
+  :bind (("s-o o" . copilot-accept-completion)
+         ("s-o >" . copilot-next-completion)
+         ("s-o <" . copilot-previous-completion)))
+
+(add-hook 'prog-mode-hook
+          (lambda()
+            ;; (fci-mode +1)
+            (flycheck-mode +1)
+            (git-gutter-mode +1)
+            ;; global-auto-revert-mode does not seem to be working for me...
+            (auto-revert-mode +1)
+            (highlight-indentation-current-column-mode +1)
+            (copilot-mode +1)))
+
+(add-hook 'emacs-lisp-mode-hook #'my/setup-emacs-lisp-mode)
+
+(custom-set-default 'checkdoc-force-docstrings-flag nil)
+
+(global-set-key (kbd "C-x k") 'kill-this-buffer)
 
 (load "my/performance")
 (load "my/setup-js-editing")
