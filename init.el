@@ -156,7 +156,6 @@
 (global-set-key (kbd "C-x /") 'comment-region)
 (global-set-key (kbd "C-x \\") 'uncomment-region)
 
-
 (use-package neotree
   :config
   (setq neo-theme 'ascii)
@@ -354,8 +353,10 @@
             (git-gutter-mode +1)
             ;; global-auto-revert-mode does not seem to be working for me...
             (auto-revert-mode +1)
-            (hl-column-mode +1)
-            (copilot-mode +1)))
+;;;         somehow this breaks the emacs daemon
+;;;            (hl-column-mode +1)
+            (copilot-mode +1)
+            ))
 
 (add-hook 'emacs-lisp-mode-hook #'my/setup-emacs-lisp-mode)
 
