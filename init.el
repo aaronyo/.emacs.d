@@ -364,6 +364,12 @@
 
 (global-set-key (kbd "C-x k") 'kill-this-buffer)
 
+
+(use-package sqlformat)
+(setq sqlformat-command 'pgformatter)
+(setq sqlformat-args '("-s2" "-g" "-B"))
+(add-hook 'sql-mode-hook 'sqlformat-on-save-mode)
+
 (load "my/performance")
 (load "my/setup-js-editing")
 (load "my/setup-python-editing")
