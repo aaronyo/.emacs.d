@@ -8,9 +8,6 @@
 (require 'flycheck)
 (require 'diminish)
 
-(use-package prettier-js
-  :diminish " prettier")
-
 (use-package js2-mode)
 
 (use-package tide)
@@ -27,28 +24,16 @@
 (with-eval-after-load 'flycheck
   (flycheck-add-mode 'javascript-eslint 'typescript-mode))
 
-(defun my/find-dominating (rel-path)
-  (let* ((root (locate-dominating-file
-                (or (buffer-file-name) default-directory)
-                rel-path))
-         (full-path (and root
-                      (expand-file-name rel-path
-                                        root))))
-    full-path))
-
 (defvar-local
   flycheck-javascript-eslint-executable nil)
 (defun my/use-dominating-eslint ()
   (setq-local
    flycheck-javascript-eslint-executable (my/find-dominating "bin/eslint")))
 
-(defvar-local prettier-js-command nil)
-(defun my/use-dominating-prettier ()
-  (setq-local prettier-js-command (my/find-dominating "bin/prettier")))
 
-(defvar-local tide-tsserver-executable nil)
-(defun my/use-dominating-tsserver ()
-  (setq-local tide-tsserver-executable (my/find-dominating "bin/tsserver")))
+;; (defvar-local tide-tsserver-executable nil)
+;; (defun my/use-dominating-tsserver ()
+;;   (setq-local tide-tsserver-executable (my/find-dominating "bin/tsserver")))
 
 (defun my/setup-js2-mode ()
   (setq mode-name "JS-2")
@@ -63,12 +48,12 @@
   (set-face-foreground 'font-lock-string-face "brightblack")
   )
 
-(defun my/setup-tide-mode ()
-  (my/use-dominating-tsserver)
-  (tide-setup)
+(defun my/setup-ts-mode ()
+;  (my/use-dominating-tsserver)
+                                        ;  (tide-setup)
   (flycheck-mode +1)
   (eldoc-mode +1)
-  (tide-hl-identifier-mode +1)
+;  (tide-hl-identifier-mode +1)
   (if (not (member 'javascript-eslint (flycheck-checker-get 'typescript-tide 'next-checkers)))
            (flycheck-add-next-checker 'typescript-tide 'javascript-eslint)
     nil)
@@ -96,7 +81,7 @@
 (global-set-key (kbd "s-u f") 'js-fix)
 
 (add-hook 'js2-mode-hook #'my/setup-js2-mode)
-(add-hook 'typescript-mode-hook #'my/setup-tide-mode)
+(add-hook 'typescript-mode-hook #'my/setup-ts-mode)
 
 (setq typescript-indent-level 2)
 

@@ -25,6 +25,15 @@
 (load "3p/init-use-package")
 (load "3p/hl-column")
 
+(defun my/find-dominating (rel-path)
+  (let* ((root (locate-dominating-file
+                (or (buffer-file-name) default-directory)
+                rel-path))
+         (full-path (and root
+                      (expand-file-name rel-path
+                                        root))))
+    full-path))
+
 ;; osx clipboard integration
 (defun copy-from-osx ()
   (shell-command-to-string "pbpaste"))
@@ -236,6 +245,12 @@
          (t 'ok)))))
   )
 
+(use-package flycheck-eglot
+  :ensure t
+  :after (flycheck eglot)
+  :config
+  (global-flycheck-eglot-mode 1))
+
 (use-package zenburn-theme
   :after (git-gutter fill-column-indicator flycheck company)
   :custom
@@ -340,11 +355,36 @@
 (use-package restclient)
 
 (use-package copilot
-  :straight (:host github :repo "zerolfx/copilot.el" :files ("dist" "*.el"))
+  :straight (:host github :repo "copilot-emacs/copilot.el" :files ("dist" "*.el"))
   :diminish " ✈"
   :bind (("s-o o" . copilot-accept-completion)
+         ("s-o n" . copilot-clear-overlay)
          ("s-o >" . copilot-next-completion)
          ("s-o <" . copilot-previous-completion)))
+
+;; see https://github.com/copilot-emacs/copilot.el/issues/250
+
+(defun copilot/cancel-on-electric-indent-chars (arg)
+  "Cancel copilot completion eagerly when electric-indent-mode is triggered."
+
+  (interactive "p")
+
+  ;; clear the overlay if visible and keypress is in electric-indent-chars. Not really a rejection, so maybe let's not notify it as such?
+  (when (and (copilot--overlay-visible)
+             (memq last-command-event electric-indent-chars))
+    (delete-overlay copilot--overlay)
+    (setq copilot--real-posn nil))
+
+  ;; continue on to self-insert command. With the copilot overlay cleared, electric-indent-mode will not be misbehave.
+  (self-insert-command arg))
+
+(defun copilot/override-electric-keys ()
+  "Override electric keys for copilot."
+  (dolist (char electric-indent-chars)
+    (message "disable electric-indent-mode for %s" (char-to-string char))
+    (define-key copilot-completion-map (vector char) 'copilot/cancel-on-electric-indent-chars)))
+
+(add-hook 'typescript-mode-hook 'copilot/override-electric-keys)
 
 (add-hook 'prog-mode-hook
           (lambda()
@@ -367,8 +407,20 @@
 
 (use-package sqlformat)
 (setq sqlformat-command 'pgformatter)
-(setq sqlformat-args '("-s2" "-g" "-B"))
-(add-hook 'sql-mode-hook 'sqlformat-on-save-mode)
+
+(defun my/setup-sql-mode ()
+  (setq-local sqlformat-args (list "-c" (my/find-dominating "pg_format.conf")))
+  (sqlformat-on-save-mode +1))
+
+(add-hook 'sql-mode-hook #'my/setup-sql-mode)
+
+(use-package prettier-js
+  :diminish " prettier")
+
+(defvar-local prettier-js-command nil)
+(defun my/use-dominating-prettier ()
+  (setq-local prettier-js-command (my/find-dominating "bin/prettier")))
+
 
 (load "my/performance")
 (load "my/setup-js-editing")
@@ -379,6 +431,7 @@
 (defun my/use-dominating-stylelint ()
   (setq-local
    flycheck-css-stylelint-executable (my/find-dominating "bin/stylelint")))
+
 
 (defun my/setup-css-mode ()
   (setq css-indent-offset 2)
