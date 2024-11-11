@@ -16,3 +16,5 @@ elpy/
 ac-comphist.dat
 straight/*
 !straight/versions
+.cache/
+tree-sitter/
