@@ -422,6 +422,10 @@
   (setq-local prettier-js-command (my/find-dominating "bin/prettier")))
 
 
+(use-package treesit-auto
+  :config
+  (global-treesit-auto-mode))
+
 (load "my/performance")
 (load "my/setup-js-editing")
 (load "my/setup-python-editing")

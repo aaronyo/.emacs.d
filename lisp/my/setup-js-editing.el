@@ -20,6 +20,7 @@
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.json\\'" . json-mode))
 (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode))
+(add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
 
 (with-eval-after-load 'flycheck
   (flycheck-add-mode 'javascript-eslint 'typescript-mode))
@@ -81,7 +82,7 @@
 (global-set-key (kbd "s-u f") 'js-fix)
 
 (add-hook 'js2-mode-hook #'my/setup-js2-mode)
-(add-hook 'typescript-mode-hook #'my/setup-ts-mode)
+(add-hook 'typescript-ts-mode-hook #'my/setup-ts-mode)
 
 (setq typescript-indent-level 2)
 
