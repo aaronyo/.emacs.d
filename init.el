@@ -86,8 +86,9 @@
   :init
   (setq ivy-rich-path-style 'abbrev
         ivy-virtual-abbreviate 'full)
-  :config (ivy-rich-mode 1))
+  )
 
+(add-hook 'after-init-hook 'ivy-rich-mode)
 
 (use-package swiper
   :after (ivy)
@@ -187,7 +188,6 @@
   (company-minimum-prefix-length 2)
   (company-show-numbers t)
   (company-tooltip-align-annotations 't)
-  (global-company-mode t)
 
   :init
   ;; begin: fix fxi alignment conflict
@@ -207,6 +207,8 @@
   ;; (add-hook 'company-completion-cancelled-hook 'company-maybe-turn-on-fci)
   ;; end: fix fxi alignment conflict
   )
+(add-hook 'after-init-hook 'global-company-mode)
+
 
 (defun my/init-window-divider ()
   (set-display-table-slot standard-display-table 'vertical-border (make-glyph-code ?▐)))
